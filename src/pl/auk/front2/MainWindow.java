@@ -1,4 +1,4 @@
-package pl.auk.front;
+package pl.auk.front2;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,7 +8,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import pl.auk.front2.StepsView;
 
 public class MainWindow extends JFrame {
 	

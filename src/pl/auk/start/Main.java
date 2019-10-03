@@ -7,8 +7,7 @@ import java.util.List;
 import pl.auk.front.ListBean;
 
 import pl.auk.back.OfferEnti;
-
-import pl.auk.front.MainWindow;
+import pl.auk.front2.MainWindow;
 import pl.auk.front2.StepsView;
 
 
