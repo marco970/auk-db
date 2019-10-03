@@ -12,31 +12,12 @@ import net.miginfocom.swing.MigLayout;
 
 public class PanelView extends JPanel implements PropertyChangeListener {
 	
-	private List<JPanel> listaStepow;
+//	private JPanel panelV;
 	
-	public PanelView(int stepNr)	{
+	public PanelView(List<List<Object>> listSteps)	{
 		super();
-		listaStepow = new ArrayList<>(); 
-		String migRow = "";
-		for (int i = stepNr; i<1; i--)	{
-			migRow=migRow+"10";
-		}
-		this.setLayout(new MigLayout(
-				"",
-				"30[grow]10[grow]30",
-				migRow
-				));
-		for (int i = stepNr; i<1; i--)	{
-			JPanel panelG = new JPanel();
-			panelG.add(new JLabel("tabela kroku "+i ));
-			this.add(panelG, "cell 0 "+(stepNr-i));
-			if (i==stepNr) {
-				JPanel panelB = new JPanel();
-				panelB.add(new JLabel("buttons"));
-				this.add(panelB, "cell 1 0");
-			}
-			
-		}
+		
+
 	}
 
 	@Override
@@ -49,7 +30,9 @@ public class PanelView extends JPanel implements PropertyChangeListener {
 		
 		return null;
 	}
-	public JPanel drawPanel(int step)		{
+	public JPanel drawPanel(List<List<Object>> listSteps)		{
+		
+		return null;
 		
 	}
 	
