@@ -6,18 +6,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import pl.auk.back.OfferEnti;
 
 public class StepsView extends JPanel {
 	
-	private List<List<Object>> stepList;
+	private List<List<OfferEnti>> stepList;
 	
-	public StepsView(List<List<Object>> stepList)	{
+	public StepsView(List<List<OfferEnti>> stepList)	{
 		super();
 		this.stepList = stepList;
 	}
 	
 	
-	public void drawPanel(List<List<Object>> stepList)	{
+	public void drawPanel(List<List<OfferEnti>> stepList)	{
 		
 		int stepNr = stepList.size();
 		
