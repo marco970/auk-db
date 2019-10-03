@@ -32,6 +32,8 @@ public class PanelView extends JPanel implements PropertyChangeListener {
 	}
 	public JPanel drawPanel(List<List<Object>> listSteps)		{
 		
+		
+		
 		return null;
 		
 	}
