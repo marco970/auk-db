@@ -49,6 +49,14 @@ public class OfferEnti {
 	public void setCena(int cena) {
 		this.cena = cena;
 	}
+
+
+	@Override
+	public String toString() {
+		return "[stepNr=" + stepNr + ", oferent=" + oferent + ", cena=" + cena + "]";
+	}
+	
+	
 	
 	
 	

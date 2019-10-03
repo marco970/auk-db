@@ -30,10 +30,10 @@ public class MainWindow extends JFrame {
 	
 	public void createGui()	{
 		
-		
+		System.out.println("CreateGui ");
 //		JFrame frame = new JFrame("Aukcja - okno g³ówne");
 		
-		int width = 500;
+		int width = 900;
 		int height=	400;	
 		setSize(width, height);
 //		setBounds(100, 100, 450, 600);
@@ -41,13 +41,16 @@ public class MainWindow extends JFrame {
 //		frame.setIconImage(img.getImage());
 		
 		JPanel panelM = new JPanel();
-		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelM.setLayout(new MigLayout(
 				"", 
 				"10[grow]10", 
-				"[grow]10[grow]"));
+				"[shrink 10, top]5[grow, top]"));
 		setContentPane(panelM);
 		panelM.add(new JLabel("G³ówne Info o aukcji"), "cell 0 0");
+//		JPanel testowy = new JPanel();
+//		testowy.add(new JLabel("Panel Testowy"));
+//		panelM.add(testowy, "cell 0 1");
 		panelM.add(sv, "cell 0 1");
 		
 		

@@ -15,32 +15,45 @@ public class StepsView extends JPanel {
 	public StepsView(List<List<OfferEnti>> stepList)	{
 		super();
 		this.stepList = stepList;
+		System.out.println(" StepsView - construct");
+		drawPanel(stepList);
+		
 	}
 	
 	
 	public void drawPanel(List<List<OfferEnti>> stepList)	{
 		
-		int stepNr = stepList.size();
+		System.out.println("StepsView - drawPanel");
 		
-		String migRow = "";
+		int stepNr = stepList.size();
+		System.out.println("drawPanel stepNr "+ stepNr); 
+		String migRow = "10";
 		for (int i = stepNr; i<1; i--)	{
 			migRow=migRow+"[grow]10";
 		}
 		this.setLayout(new MigLayout(
 				"",
-				"30[grow]10[grow]30",
+				"10[grow]10[grow]10",
 				migRow
 				));
-		for (int i = stepNr; i<1; i--)	{
+		for (int i = stepNr; i>1; i--)	{
+			System.out.println("testloop "+i);
+		}
+		
+		for (int i = stepNr; i>0; i--)	{
+			System.out.println("first loop "+i);
 			if (i==stepNr)	{
 				add(new JLabel("buttons"), "cell 1 0");
 			}
 			int j = 0;
-			for (Object el: stepList.get(i)) {
+			for (OfferEnti el: stepList.get(i-1)) {
 				add(new JLabel(el.toString()), "cell 0 "+i);
+				System.out.println(el.toString());
 				j++;
 			}
 		}
+		
+//		add(new JLabel("drawPanel - test"));
 		
 		
 	}
