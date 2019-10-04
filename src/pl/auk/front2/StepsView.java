@@ -56,16 +56,28 @@ public class StepsView extends JPanel {
 //				add(new JLabel(el.toString()), "cell 0 "+i);
 //				System.out.println(el.toString());
 //			}
-			
+			String start = "<html><body><table>";
+			String naglowki = "<tr><td style=\"width: 100px\">Oferent</td><td style=\"width: 100px\">Cena</td></tr>";
+			String end = "</table></body></html>";
+			String middle = "";
 			for (int j=0; j<stepList.get(i-1).size(); j++)	{
-				Vector<Object> row = new Vector<>();
-				row.addElement(stepList.get(i-1).get(j).getOferent());
-				row.addElement(stepList.get(i-1).get(j).getCena());
-				dane.addElement(row);
 				System.out.println("--> "+stepList.get(i-1).get(j));
+				middle = middle +"<tr><td>"+stepList.get(i-1).get(j).getOferent().toString()+"</td>"
+						+ "<td>"+stepList.get(i-1).get(j).getCena()+"</td></tr>";
+				
+				
 			}
-			JTable table = new JTable(dane,columnNames);
-			add(table, "cell 0 "+i);
+			
+//			for (int j=0; j<stepList.get(i-1).size(); j++)	{
+//				Vector<Object> row = new Vector<>();
+//				row.addElement(stepList.get(i-1).get(j).getOferent());
+//				row.addElement(stepList.get(i-1).get(j).getCena());
+//				dane.addElement(row);
+//				System.out.println("--> "+stepList.get(i-1).get(j));
+//			}
+//			JTable table = new JTable(dane,columnNames);
+			JLabel html = new JLabel(start+naglowki+middle+end);
+			add(html, "cell 0 "+i);
 			
 			
 		}
