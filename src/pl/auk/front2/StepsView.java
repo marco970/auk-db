@@ -1,5 +1,7 @@
 package pl.auk.front2;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.List;
 import java.util.Vector;
 
@@ -57,7 +59,7 @@ public class StepsView extends JPanel {
 //				System.out.println(el.toString());
 //			}
 			String start = "<html><body><table>";
-			String naglowki = "<tr><td style=\"width: 100px\">Oferent</td><td style=\"width: 100px\">Cena</td></tr>";
+			String naglowki = "<tr><td style=\"width: 100px\"><b>Oferent</b></td><td style=\"width: 100px\"><b>Cena</b></td></tr>";
 			String end = "</table></body></html>";
 			String middle = "";
 			for (int j=0; j<stepList.get(i-1).size(); j++)	{
@@ -77,6 +79,8 @@ public class StepsView extends JPanel {
 //			}
 //			JTable table = new JTable(dane,columnNames);
 			JLabel html = new JLabel(start+naglowki+middle+end);
+			html.setFont(new Font("SanSerif", Font.PLAIN, 12));
+//			html.setForeground(new Color(0xffffdd));
 			add(html, "cell 0 "+i);
 			
 			
