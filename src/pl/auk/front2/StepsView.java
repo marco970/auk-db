@@ -52,12 +52,16 @@ public class StepsView extends JPanel implements ActionListener {
 //		buttons.add(new JLabel("buttons"));
 		JButton maile = new JButton("Utwórz maile");
 		JButton krok = new JButton("Kolejny krok");
+		JButton popraw = new JButton("Popraw Oferty");
 		maile.addActionListener(this);
 		krok.addActionListener(this);
-		maile.setSize(new Dimension(100, 20));
-		krok.setSize(new Dimension(100, 20));
+		popraw.addActionListener(this);
+		popraw.setPreferredSize(new Dimension(120, 10));
+		maile.setPreferredSize(new Dimension(120, 10));
+		krok.setPreferredSize(new Dimension(120, 10));
 		buttons.add(maile);
 		buttons.add(krok);
+		buttons.add(popraw);
 		
 		
 		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
