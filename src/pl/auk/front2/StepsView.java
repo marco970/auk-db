@@ -1,11 +1,15 @@
 package pl.auk.front2;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -13,15 +17,19 @@ import javax.swing.JTable;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
 
-public class StepsView extends JPanel {
+public class StepsView extends JPanel implements ActionListener {
 	
 	private List<List<OfferEnti>> stepList;
+	private List<OfferEnti> lastStep;
+	private int stepNr;
 	
 	public StepsView(List<List<OfferEnti>> stepList)	{
 		super();
 		this.stepList = stepList;
 //		System.out.println("StepsView - construct");
 		drawPanel(stepList);
+		this.lastStep = stepList.get(stepList.size()-1);
+		this.stepNr = stepList.size()-1;
 		
 	}
 	
@@ -31,7 +39,7 @@ public class StepsView extends JPanel {
 		int stepNr = stepList.size();
 		String migRow = "10";
 		for (int i = stepNr; i<1; i--)	{
-			migRow=migRow+"[grow]20";
+			migRow=migRow+"[grow, top]20";
 		}
 		this.setLayout(new MigLayout(
 				"",
@@ -39,6 +47,18 @@ public class StepsView extends JPanel {
 				migRow
 				));
 
+		JPanel buttons = new JPanel();
+		buttons.setLayout(new MigLayout("wrap 1"));
+//		buttons.add(new JLabel("buttons"));
+		JButton maile = new JButton("Utwórz maile");
+		JButton krok = new JButton("Kolejny krok");
+		maile.addActionListener(this);
+		krok.addActionListener(this);
+		maile.setSize(new Dimension(100, 20));
+		krok.setSize(new Dimension(100, 20));
+		buttons.add(maile);
+		buttons.add(krok);
+		
 		
 		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
 			System.out.println("first loop "+i);
@@ -46,11 +66,11 @@ public class StepsView extends JPanel {
 //			add(new JLabel("step nr "+i), "cell 0 "+(stepNr-i));
 			String start;
 			if (i==stepNr)	{
-				add(new JLabel("buttons"), "cell 1 0");
-				start = "<html><body><table style=\"width: 100%; height: 0; border: 1px solid #000000; background-color: #FFFFFF;\" cellpadding=\"1\" cellspacing=\"0\">";
+				add(buttons, "cell 1 0");
+				start = "<html><body><table style=\"width: 100%; height: 0; border: 0px solid #000000; background-color: #FFFFFF;\" cellpadding=\"1\" cellspacing=\"0\">";
 			}
 			else {
-				start = "<html><body><table style=\"width: 100%; height: 0; border: 1px solid #000000;\" cellpadding=\"1\" cellspacing=\"0\">";
+				start = "<html><body><table style=\"width: 100%; height: 0; border: 0px solid #000000; padding-top: 10px;\" cellpadding=\"1\" cellspacing=\"0\">";
 				
 			}
 			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post¹pienie "+100+"<br /></p></td></tr>";
@@ -76,6 +96,19 @@ public class StepsView extends JPanel {
 //			html.setForeground(new Color(0xffffdd));
 			add(html, "cell 0 "+(stepNr-i));	
 		}
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.getActionCommand());
+		
+		if (e.getActionCommand().equals("Kolejny krok"))	{
+			StepEnterForm.getInstance(stepNr+1, lastStep);
+		}
+		
+		
+		
 	}
 	
 	

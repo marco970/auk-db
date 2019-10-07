@@ -6,11 +6,13 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import pl.auk.back.OfferEnti;
+
 
 
 public class ListBean {
 	
-	private List<List<Object>> listSteps;
+	private List<List<OfferEnti>> listSteps;
 	
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
 	
@@ -18,17 +20,17 @@ public class ListBean {
 		
 	}
 	
-	public ListBean(List<List<Object>> listSteps)		{
+	public ListBean(List<List<OfferEnti>> listSteps)		{
 		setListBean(listSteps);
 	}
 
-	public List<List<Object>> getListBean() {
+	public List<List<OfferEnti>> getListBean() {
 		return listSteps;
 	}
 
-	public void setListBean(List<List<Object>> inputSteps) {
-		List<List<Object>> oldListSteps = listSteps;
-		listSteps = inputSteps;
+	public void setListBean(List<List<OfferEnti>> listSteps2) {
+		List<List<OfferEnti>> oldListSteps = listSteps;
+		listSteps = listSteps2;
 
 		propertyChange.firePropertyChange("listSteps", oldListSteps, listSteps);
 	}
