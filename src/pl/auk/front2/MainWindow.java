@@ -50,26 +50,7 @@ public class MainWindow extends JFrame {
 		panelM.add(scroll, "cell 0 1");
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scroll);
-		
-		
-//		JPanel panelG = new JPanel();
-//		int krok = 3;
-//		String migRow = "";
-//		for (int i = 0; i < krok; i++)	{
-//			migRow = migRow + "10[grow]";
-//		}
-//		migRow=migRow+"10";
-//		System.out.println(migRow);
-//		panelG.setLayout(new MigLayout(
-//				"",
-//				"10[grow]10",
-//				migRow				
-//				));
-//		for (int i = 0; i < krok; i++)	{
-//			panelG.add(new JLabel("table "+i), "cell 0 "+i);
-//			panelG.add(new JLabel("buttons "+i), "cell 1 "+i);
-//		}
-//		panelM.add(panelG, "cell 0 1");
+
 
 		
 		

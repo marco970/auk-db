@@ -1,6 +1,9 @@
 package pl.auk.front2;
 
 
+import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
@@ -12,7 +15,7 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
 
-public class StepEnterForm extends JFrame {
+public class StepEnterForm extends JFrame implements FocusListener {
 	
 	private static Set<Integer> stepSet = new HashSet<>();
 	
@@ -33,7 +36,8 @@ public class StepEnterForm extends JFrame {
 			panel.add(oferent, "gapleft 30");
 			JTextField cena = new JTextField(el.getCena()+"",120);
 			cena.setHorizontalAlignment(SwingConstants.RIGHT);
-			cena.setSize(120, 12);
+			cena.setPreferredSize(new Dimension(15, 20));
+			cena.setName(String.valueOf(el.getOferent()));
 			panel.add(cena);
 			panel.add(new JLabel("                                  "), "wrap");
 		}
@@ -44,11 +48,7 @@ public class StepEnterForm extends JFrame {
                 if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
             }
         });
-		
-		
-		
-		
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setBounds(100, 100, 300, 200);
@@ -60,5 +60,17 @@ public class StepEnterForm extends JFrame {
 			return null;
 		}
 		return new StepEnterForm(stepNr, lastStep);
+	}
+
+	@Override
+	public void focusGained(FocusEvent fg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent fl) {
+		System.out.println(fl.getID());
+		
 	}
 }
