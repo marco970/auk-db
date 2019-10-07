@@ -23,6 +23,8 @@ public class StepsView extends JPanel implements ActionListener {
 	private List<OfferEnti> lastStep;
 	private int stepNr;
 	
+	private int minPost;
+	
 	public StepsView(List<List<OfferEnti>> stepList)	{
 		super();
 		this.stepList = stepList;
@@ -30,6 +32,7 @@ public class StepsView extends JPanel implements ActionListener {
 		drawPanel(stepList);
 		this.lastStep = stepList.get(stepList.size()-1);
 		this.stepNr = stepList.size()-1;
+		this.minPost = 100;		//potem odczytamy to z formularza jakiegoœ
 		
 	}
 	
@@ -77,7 +80,7 @@ public class StepsView extends JPanel implements ActionListener {
 				start = "<html><body><table style=\"width: 100%; height: 0; border: 0px solid #000000; padding-top: 10px;\" cellpadding=\"1\" cellspacing=\"0\">";
 				
 			}
-			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post¹pienie "+100+"<br /></p></td></tr>";
+			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post¹pienie "+minPost+"<br /></p></td></tr>";
 			String naglowki = "<tr><td style=\"width: 100px;\"><b>Oferent</b>"
 					+ "</td><td style=\"width: 60px;\"><b>Cena</b></td>"
 					+ "</td><td style=\"width: 100px\"><b>Cena z domiarem</b></td>"
@@ -108,7 +111,7 @@ public class StepsView extends JPanel implements ActionListener {
 		System.out.println(e.getActionCommand());
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
-			StepEnterForm.getInstance(stepNr+1, lastStep);
+			StepEnterForm.getInstance(stepNr+1, lastStep, minPost);
 		}
 		
 		
