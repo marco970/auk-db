@@ -22,17 +22,20 @@ public class StepEnterForm extends JFrame implements FocusListener {
 	
 	private int minPost;
 	
-	private HashMap<String, Integer> map;
+	private HashMap<String, Integer> mapOffer;
 	
-	private JLabel odstep;
+	private HashMap<String, JLabel> mapMessage;
+	
+	private JLabel message;
 	
 	
 	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost)	{
 		super("wprowadzanie ofert dla kroku "+(stepNr));
 		stepSet.add(stepNr);
 		this.minPost = minPost;
-		this.map = new HashMap<>();
-//		this.message = new JLabel("                              ");
+		this.mapOffer = new HashMap<>();
+		this.mapMessage = new HashMap<>();
+		this.message = new JLabel("                              ");
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
@@ -40,7 +43,10 @@ public class StepEnterForm extends JFrame implements FocusListener {
 		add(panel);
 		panel.add(new JLabel("Oferty dla kroku "+(stepNr)), "wrap");
 		panel.add(new JLabel(" "), "wrap");
+		int j = 0;
 		for (OfferEnti el: lastStep)	{
+			mapOffer.put(el.getOferent(), el.getCena());
+			mapMessage.put(el.getOferent(), new JLabel("                                                    "));
 			JLabel oferent = new JLabel(el.getOferent());
 			oferent.setHorizontalAlignment(SwingConstants.RIGHT);
 			panel.add(oferent, "gapleft 30");
@@ -52,8 +58,9 @@ public class StepEnterForm extends JFrame implements FocusListener {
 			panel.add(cena);
 			
 //			message.setPreferredSize(new Dimension(200,15));
-			odstep = new JLabel("                              ");
-			panel.add(odstep, "wrap");
+//			odstep = new JLabel("                              ");
+			panel.add(mapMessage.get(el.getOferent()), "wrap");
+			j++;
 		}
 		
 		addWindowListener(new WindowAdapter() {
@@ -86,7 +93,7 @@ public class StepEnterForm extends JFrame implements FocusListener {
 	@Override
 	public void focusLost(FocusEvent fl) {
 		System.out.println(fl.getComponent().getName());
-		odstep.setText("nieprawid³owa wartoœæ!       ");
+		mapMessage.get(fl.getComponent().getName()).setText("nieprawid³owa wartoœæ!");
 		System.out.println();
 		
 	}
