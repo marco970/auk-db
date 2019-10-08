@@ -46,20 +46,20 @@ public class StepEnterForm extends JFrame implements FocusListener {
 		int j = 0;
 		for (OfferEnti el: lastStep)	{
 			mapOffer.put(el.getOferent(), el.getCena());
-			mapMessage.put(el.getOferent(), new JLabel("                                                    "));
+			mapMessage.put(el.getOferent(), new JLabel(""));
 			JLabel oferent = new JLabel(el.getOferent());
 			oferent.setHorizontalAlignment(SwingConstants.RIGHT);
 			panel.add(oferent, "gapleft 30");
-			JTextField cena = new JTextField(el.getCena()+"",120);
+			JTextField cena = new JTextField(el.getCena()+"");
 			cena.setHorizontalAlignment(SwingConstants.RIGHT);
 			cena.setPreferredSize(new Dimension(15, 20));
 			cena.setName(String.valueOf(el.getOferent()));
 			cena.addFocusListener(this);
-			panel.add(cena);
+			panel.add(cena, "w 100!");
 			
 //			message.setPreferredSize(new Dimension(200,15));
 //			odstep = new JLabel("                              ");
-			panel.add(mapMessage.get(el.getOferent()), "wrap");
+			panel.add(mapMessage.get(el.getOferent()), "wrap, w 150!");
 			j++;
 		}
 		
@@ -93,6 +93,7 @@ public class StepEnterForm extends JFrame implements FocusListener {
 	@Override
 	public void focusLost(FocusEvent fl) {
 		System.out.println(fl.getComponent().getName());
+		
 		mapMessage.get(fl.getComponent().getName()).setText("nieprawid³owa wartoœæ!");
 		System.out.println();
 		
