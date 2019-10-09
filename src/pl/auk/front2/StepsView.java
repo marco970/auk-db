@@ -44,6 +44,7 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	public void drawPanel(List<List<OfferEnti>> stepList)	{
 		
 		int stepNr = stepList.size();
+		System.out.println("sv drawPanel stepNr"+stepNr);
 		String migRow = "10";
 		for (int i = stepNr; i<1; i--)	{
 			migRow=migRow+"[grow, top]20";
@@ -122,10 +123,9 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		
-		System.out.println("a kuku???");
-		
-		List<List<OfferEnti>> oldStepList = stepList;
-		List<List<OfferEnti>> newStepList = evt.getNewValue();
+		System.out.println("sv - a kuku???");
+		System.out.println("tutestuje sv "+evt.getNewValue().getClass());
+		List<List<OfferEnti>> newStepList = (List<List<OfferEnti>>) evt.getNewValue();
 		
 		System.out.println(this.getClass().toString()+" "+newStepList.size());
 		

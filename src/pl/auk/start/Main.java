@@ -8,6 +8,7 @@ import pl.auk.front.ListBean;
 
 import pl.auk.back.OfferEnti;
 import pl.auk.front2.MainWindow;
+import pl.auk.front2.PropertyTest;
 import pl.auk.front2.StepsView;
 
 
@@ -36,10 +37,12 @@ public class Main {
 		
 		System.out.println("uwaga main "+lb.toString());
 		
-
+		PropertyTest pt = new PropertyTest();
+//		
+		lb.addPropertyChangeListener(pt);
 		StepsView sv = new StepsView(lb);
 		
-		sv.addPropertyChangeListener(sv);
+		lb.addPropertyChangeListener(sv);
 
 		new MainWindow(sv);
 

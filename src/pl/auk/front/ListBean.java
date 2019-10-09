@@ -31,8 +31,12 @@ public class ListBean {
 		System.out.println(this.getClass().toString()+" "+listSteps2.size());
 		List<List<OfferEnti>> oldListSteps = listSteps;
 		listSteps = listSteps2;
+		
+		System.out.println("tamtestuje"+listSteps2.getClass());
+		System.out.println("tamtestuje2"+listSteps.getClass());
 
 		propertyChange.firePropertyChange("listSteps", oldListSteps, listSteps);
+		
 	}
 	
 	public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {

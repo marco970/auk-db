@@ -156,13 +156,15 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 					err = true;
 				}
 			}
+			
 			if (!err) {
 				stepList.add(nextStep);
-				System.out.println(lb.toString());
+				System.out.println("SEF "+lb.toString());
 				lb.setListBean(stepList);
 			}
 			
-			
+			this.dispose();
+			if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
 		}
 		
 	}
