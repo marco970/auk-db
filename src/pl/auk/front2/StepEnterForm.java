@@ -2,10 +2,13 @@ package pl.auk.front2;
 
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,8 +18,15 @@ import javax.swing.*;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
+import pl.auk.front.ListBean;
 
-public class StepEnterForm extends JFrame implements FocusListener {
+public class StepEnterForm extends JFrame implements FocusListener, ActionListener {
+	
+	private int stepNr;
+	
+	private List<List<OfferEnti>> stepList;
+	
+	private ListBean lb;
 	
 	private static Set<Integer> stepSet = new HashSet<>();
 	
@@ -26,16 +36,38 @@ public class StepEnterForm extends JFrame implements FocusListener {
 	
 	private HashMap<String, JLabel> mapMessage;
 	
+	private HashMap<String, JTextField> mapJtf;
+	
+	
 	private JLabel message;
 	
+	private JButton zapisz;
 	
-	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost)	{
+	private JButton anuluj;
+	
+	
+	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb)	{
 		super("wprowadzanie ofert dla kroku "+(stepNr));
 		stepSet.add(stepNr);
+		this.stepNr = stepNr;
 		this.minPost = minPost;
+		this.stepList = stepList;
+		this.lb = lb;
+		
+//		System.out.println("uwaga "+lb.toString());
+		
 		this.mapOffer = new HashMap<>();
 		this.mapMessage = new HashMap<>();
-		this.message = new JLabel("                              ");
+		this.mapJtf = new HashMap<>();
+		
+		this.message = new JLabel("");
+		
+		this.zapisz = new JButton("Zapisz");
+		this.anuluj = new JButton("Anuluj");
+		
+		zapisz.addActionListener(this);
+		anuluj.addActionListener(this);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
@@ -51,6 +83,7 @@ public class StepEnterForm extends JFrame implements FocusListener {
 			oferent.setHorizontalAlignment(SwingConstants.RIGHT);
 			panel.add(oferent, "gapleft 30");
 			JTextField cena = new JTextField(el.getCena()+"");
+			mapJtf.put(el.getOferent(), cena);
 			cena.setHorizontalAlignment(SwingConstants.RIGHT);
 			cena.setPreferredSize(new Dimension(15, 20));
 			cena.setName(String.valueOf(el.getOferent()));
@@ -63,12 +96,17 @@ public class StepEnterForm extends JFrame implements FocusListener {
 			j++;
 		}
 		
+		
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
             }
         });
+		
+		
+		panel.add(anuluj, "gap 30");
+		panel.add(zapisz);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -77,11 +115,11 @@ public class StepEnterForm extends JFrame implements FocusListener {
 		
 	}
 	
-	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, int minPost)	{
+	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb)	{
 		if (stepSet.contains(stepNr))	{
 			return null;
 		}
-		return new StepEnterForm(stepNr, lastStep, minPost);
+		return new StepEnterForm(stepNr, lastStep, minPost, stepList, lb);
 	}
 
 	@Override
@@ -92,10 +130,40 @@ public class StepEnterForm extends JFrame implements FocusListener {
 
 	@Override
 	public void focusLost(FocusEvent fl) {
-		System.out.println(fl.getComponent().getName());
+//		System.out.println(fl.getComponent().getName());
+//		
+////		mapMessage.get(fl.getComponent().getName()).setText("nieprawid³owa wartoœæ!");
+//		System.out.println("FocusLost!");
 		
-		mapMessage.get(fl.getComponent().getName()).setText("nieprawid³owa wartoœæ!");
-		System.out.println();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("zapisz"));	{
+			List<OfferEnti> nextStep = new ArrayList<>();
+			boolean err = false;
+			for(String el: mapJtf.keySet())	{
+				String newOffer=  mapJtf.get(el).getText();
+//				System.out.println("aaa- > "+el+" "+newOffer);
+				int value = Integer.valueOf(newOffer);
+				if (value == mapOffer.get(el))	{
+					OfferEnti oe = new OfferEnti(stepNr, el, mapOffer.get(el));
+					nextStep.add(oe);
+
+				}
+				else	{
+					mapMessage.get(el).setText("nieprawid³owa wartoœæ!");
+					err = true;
+				}
+			}
+			if (!err) {
+				stepList.add(nextStep);
+				System.out.println(lb.toString());
+				lb.setListBean(stepList);
+			}
+			
+			
+		}
 		
 	}
 }

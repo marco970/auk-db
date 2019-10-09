@@ -17,7 +17,6 @@ public class ListBean {
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
 	
 	public ListBean()	{
-		
 	}
 	
 	public ListBean(List<List<OfferEnti>> listSteps)		{
@@ -28,7 +27,8 @@ public class ListBean {
 		return listSteps;
 	}
 
-	public void setListBean(List<List<OfferEnti>> listSteps2) {
+	public synchronized void setListBean(List<List<OfferEnti>> listSteps2) {
+		System.out.println(this.getClass().toString()+" "+listSteps2.size());
 		List<List<OfferEnti>> oldListSteps = listSteps;
 		listSteps = listSteps2;
 

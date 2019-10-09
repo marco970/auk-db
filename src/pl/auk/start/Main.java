@@ -22,11 +22,7 @@ public class Main {
 		krok0.add(new OfferEnti(0, "Nokia", 1000));
 		krok0.add(new OfferEnti(0, "Huawei", 900));
 		krok0.add(new OfferEnti(0, "Computaris", 1100));
-		
-	
 
-		
-		
 		List<OfferEnti> krok1 = new ArrayList<>();
 		krok1.add(new OfferEnti(1, "Nokia", 900));
 		krok1.add(new OfferEnti(1, "Huawei", 800));
@@ -36,11 +32,15 @@ public class Main {
 		aukcja.add(krok0);
 		aukcja.add(krok1);
 		
+		ListBean lb = new ListBean(aukcja);
 		
-		StepsView sv = new StepsView(aukcja);
+		System.out.println("uwaga main "+lb.toString());
 		
+
+		StepsView sv = new StepsView(lb);
 		
-		
+		sv.addPropertyChangeListener(sv);
+
 		new MainWindow(sv);
 
 

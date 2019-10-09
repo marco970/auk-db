@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
@@ -16,27 +18,29 @@ import javax.swing.JTable;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
+import pl.auk.front.ListBean;
 
-public class StepsView extends JPanel implements ActionListener {
+public class StepsView extends JPanel implements ActionListener, PropertyChangeListener {
 	
 	private List<List<OfferEnti>> stepList;
 	private List<OfferEnti> lastStep;
 	private int stepNr;
+	private ListBean lb;
 	
 	private int minPost;
 	
-	public StepsView(List<List<OfferEnti>> stepList)	{
+	public StepsView(ListBean lb)	{
 		super();
-		this.stepList = stepList;
+		this.stepList = lb.getListBean();
 //		System.out.println("StepsView - construct");
 		drawPanel(stepList);
 		this.lastStep = stepList.get(stepList.size()-1);
 		this.stepNr = stepList.size()-1;
 		this.minPost = 100;		//potem odczytamy to z formularza jakiegoœ
+		this.lb = lb;
 		
 	}
-	
-	
+
 	public void drawPanel(List<List<OfferEnti>> stepList)	{
 		
 		int stepNr = stepList.size();
@@ -68,7 +72,7 @@ public class StepsView extends JPanel implements ActionListener {
 		
 		
 		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
-			System.out.println("first loop "+i);
+//			System.out.println("first loop "+i);
 			
 //			add(new JLabel("step nr "+i), "cell 0 "+(stepNr-i));
 			String start;
@@ -88,12 +92,11 @@ public class StepsView extends JPanel implements ActionListener {
 			String end = "</table></body></html>";
 			String middle = "";
 			
-		      DecimalFormat myFormatter = new DecimalFormat("CUR ###,###");
-		      
-			
+		      DecimalFormat myFormatter = new DecimalFormat("$ ###,###");
+
 			for (int j=0; j<stepList.get(i-1).size(); j++)	{
 				String output = myFormatter.format(stepList.get(i-1).get(j).getCena());
-				System.out.println("--> "+stepList.get(i-1).get(j));
+//				System.out.println("--> "+stepList.get(i-1).get(j));
 				middle = middle +"<tr><td>"+stepList.get(i-1).get(j).getOferent().toString()+"</td>"
 						+ "<td style=\"text-align: right;\">"+output+"</td></tr>";
 			}
@@ -105,16 +108,29 @@ public class StepsView extends JPanel implements ActionListener {
 		}
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
-			StepEnterForm.getInstance(stepNr+1, lastStep, minPost);
+			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb);
 		}
+
+	}
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
 		
+		System.out.println("a kuku???");
 		
+		List<List<OfferEnti>> oldStepList = stepList;
+		List<List<OfferEnti>> newStepList = evt.getNewValue();
+		
+		System.out.println(this.getClass().toString()+" "+newStepList.size());
+		
+		this.removeAll();
+		drawPanel(newStepList);
 		
 	}
 	
