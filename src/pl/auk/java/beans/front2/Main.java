@@ -1,15 +1,9 @@
-package pl.auk.start;
+package pl.auk.java.beans.front2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import pl.auk.front.ListBean;
-
 import pl.auk.back.OfferEnti;
-import pl.auk.front2.MainWindow;
-import pl.auk.front2.PropertyTest;
-import pl.auk.front2.StepsView;
 
 
 public class Main {

@@ -1,4 +1,4 @@
-package pl.auk.front2;
+package pl.auk.java.beans.front2;
 
 
 import java.awt.Dimension;
@@ -18,7 +18,6 @@ import javax.swing.*;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
-import pl.auk.front.ListBean;
 
 public class StepEnterForm extends JFrame implements FocusListener, ActionListener {
 	
@@ -142,13 +141,15 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 		if (e.getActionCommand().equals("zapisz"));	{
 			List<OfferEnti> nextStep = new ArrayList<>();
 			boolean err = false;
+			System.out.println("SEF error 1 "+err+"--> "+lb.toString());
 			for(String el: mapJtf.keySet())	{
 				String newOffer=  mapJtf.get(el).getText();
 //				System.out.println("aaa- > "+el+" "+newOffer);
 				int value = Integer.valueOf(newOffer);
-				if (value == mapOffer.get(el))	{
-					OfferEnti oe = new OfferEnti(stepNr, el, mapOffer.get(el));
+				if (true)	{		//value <= mapOffer.get(el)
+					OfferEnti oe = new OfferEnti(stepNr, el, value);
 					nextStep.add(oe);
+					System.out.println("SEF error 2 "+err+"--> "+lb.toString()+" "+oe.getCena());
 
 				}
 				else	{
@@ -157,9 +158,15 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 				}
 			}
 			
-			if (!err) {
+			if (true) {
 				stepList.add(nextStep);
-				System.out.println("SEF "+lb.toString());
+				
+				for (List<OfferEnti> elD: stepList)	{
+					for (OfferEnti eld: elD)	{
+						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
+					}
+				}
+				System.out.println("SEF error 3 "+err+"--> "+lb.toString());
 				lb.setListBean(stepList);
 			}
 			

@@ -1,4 +1,4 @@
-package pl.auk.front2;
+package pl.auk.java.beans.front2;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +18,6 @@ import javax.swing.JTable;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
-import pl.auk.front.ListBean;
 
 public class StepsView extends JPanel implements ActionListener, PropertyChangeListener {
 	
