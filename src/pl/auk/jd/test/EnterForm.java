@@ -17,10 +17,14 @@ public class EnterForm extends JFrame implements ActionListener {
 	private JButton setStep;
 	private JTextField pole;
 	private int stepNr;
+	private StepBean sb;
+	private TheView theView;
 	
-	public EnterForm(int stepN)	{
+	public EnterForm(int stepN, StepBean sb, TheView theView)	{
 		super("zmieniam krok");
 		this.stepNr = stepNr;
+		this.sb = sb;
+		this.theView = theView;
 		
 		System.out.println(stepNr);
 		
@@ -53,7 +57,12 @@ public class EnterForm extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("zapisz"))	{
-			System.out.println("zapisujê "+ pole.getText());
+			
+			int stepToSave = Integer.parseInt(pole.getText());
+			System.out.println("zapisujê "+ stepToSave);
+			sb.setStepNr(stepToSave);
+			theView.dispose();
+			new TheView(stepToSave,sb);
 		}
 		
 	}

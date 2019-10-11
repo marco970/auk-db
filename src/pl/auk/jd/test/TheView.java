@@ -19,7 +19,7 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 	private StepBean sb;
 	
 	
-	public TheView(int stepNr, StepBean sb)	{
+	public TheView(int stepNr, StepBean sb, DynamicLabel dl)	{
 		super("test dymnamicznej Javy");
 		this.stepNr = stepNr;
 		this.sb = sb;
@@ -28,7 +28,7 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 		JLabel stepDisplay = new JLabel(""+stepNr);
 		panel.add(new JLabel("Witamy na oœrodku!"), "wrap");
 //		panel.add(new JLabel(" "), "wrap");
-		panel.add(stepDisplay, "wrap, gaptop 10, gapleft 10");
+		panel.add(dl, "wrap, gaptop 10, gapleft 10");
 		this.next = new JButton("Kolejny Krok");
 		next.addActionListener(this);
 		panel.add(next, "dock south, gaptop 20");
@@ -46,7 +46,7 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Kolejny Krok"))	{
 			System.out.println(this.getClass().toString()+" akcja "+stepNr);
-			new EnterForm(stepNr+1);
+			new EnterForm((stepNr+1), sb, this);
 		}
 		
 	}
@@ -56,7 +56,7 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 	public void propertyChange(PropertyChangeEvent evt) {
 		int newStep = (int) evt.getNewValue();
 		
-		System.out.println("newStep = "+newStep);
+		System.out.println("propChange ---> newStep = "+newStep);
 		
 	}
 	

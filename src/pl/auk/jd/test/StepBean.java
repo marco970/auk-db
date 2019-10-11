@@ -5,10 +5,16 @@ import java.beans.PropertyChangeSupport;
 
 public class StepBean {
 	
-	private int stepNr;
+	private int stepNr = 0;
 	
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
 
+	
+	public StepBean()	{
+		
+	}
+	
+	
 	public StepBean(int stepNr) {
 		setStepNr(stepNr); 
 	}
@@ -22,6 +28,8 @@ public class StepBean {
 	}
 
 	public void setStepNr(int stepNr) {
+		
+		System.out.println("jest set "+ stepNr);
 		int prevStepNr = stepNr;
 		this.stepNr = stepNr;
 		
