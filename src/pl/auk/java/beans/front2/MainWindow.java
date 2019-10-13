@@ -22,7 +22,8 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 	public MainWindow(StepsView sv) 	{
 		
 		super("Aukcja - okno g³ówne");
-		this.sv = sv;
+		setDynamicView(sv);
+		sv.setMainWindowInstance(this);
 		
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -31,6 +32,10 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 		        createGui();
 		      }
 		    });
+	}
+	
+	public void setDynamicView(StepsView sv)	{
+		this.sv = sv;
 	}
 	
 	public void createGui()	{
@@ -54,12 +59,6 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scroll);
 
-
-		
-		
-		
-
-		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);

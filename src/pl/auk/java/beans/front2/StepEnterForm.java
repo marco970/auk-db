@@ -37,6 +37,8 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 	
 	private HashMap<String, JTextField> mapJtf;
 	
+	private StepsView stepsView;
+	
 	
 	private JLabel message;
 	
@@ -45,13 +47,14 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 	private JButton anuluj;
 	
 	
-	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb)	{
+	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
 		super("wprowadzanie ofert dla kroku "+(stepNr));
 		stepSet.add(stepNr);
 		this.stepNr = stepNr;
 		this.minPost = minPost;
 		this.stepList = stepList;
 		this.lb = lb;
+		this.stepsView = stepsView;
 		
 //		System.out.println("uwaga "+lb.toString());
 		
@@ -114,11 +117,11 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 		
 	}
 	
-	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb)	{
+	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
 		if (stepSet.contains(stepNr))	{
 			return null;
 		}
-		return new StepEnterForm(stepNr, lastStep, minPost, stepList, lb);
+		return new StepEnterForm(stepNr, lastStep, minPost, stepList, lb, stepsView);
 	}
 
 	@Override
@@ -166,8 +169,10 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 //						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
 					}
 				}
-				System.out.println("SEF error 3 "+err+"--> "+lb.toString());
+				System.out.println("SEF error 3 "+err+"--> "+lb.toString()+stepList.size());
 				lb.setListBean(stepList);
+				stepsView.setDynamicContent(stepList);
+				stepsView.getMainWindowInstance().setDynamicView(stepsView);
 			}
 			
 			this.dispose();

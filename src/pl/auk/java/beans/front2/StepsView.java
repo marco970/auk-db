@@ -28,6 +28,8 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	
 	private int minPost;
 	
+	private MainWindow mw = null;
+	
 	public StepsView(ListBean lb)	{
 		super();
 		this.stepList = lb.getListBean();
@@ -38,6 +40,23 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 		this.minPost = 100;		//potem odczytamy to z formularza jakiegoœ
 		this.lb = lb;
 		
+		
+	}
+	
+	public void setDynamicContent(List<List<OfferEnti>> newStepList)	{
+		this.removeAll();
+		this.drawPanel(newStepList);
+	}
+	
+	public void setMainWindowInstance(MainWindow mw)	{
+		this.mw = mw;
+	}
+	
+	
+	
+
+	public MainWindow getMainWindowInstance() {
+		return mw;
 	}
 
 	public void drawPanel(List<List<OfferEnti>> stepList)	{
@@ -113,7 +132,7 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 		System.out.println(e.getActionCommand());
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
-			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb);
+			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
 		}
 
 	}
