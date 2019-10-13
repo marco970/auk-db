@@ -163,7 +163,7 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 				
 				for (List<OfferEnti> elD: stepList)	{
 					for (OfferEnti eld: elD)	{
-						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
+//						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
 					}
 				}
 				System.out.println("SEF error 3 "+err+"--> "+lb.toString());

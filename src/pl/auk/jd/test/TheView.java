@@ -18,16 +18,20 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 	private int stepNr;
 	private StepBean sb;
 	
+	private DynamicLabel dl;
 	
-	public TheView(int stepNr, StepBean sb, DynamicLabel dl)	{
+	
+	public TheView(StepBean sb, DynamicLabel dl)	{
 		super("test dymnamicznej Javy");
-		this.stepNr = stepNr;
+		this.stepNr = sb.getStepNr();
 		this.sb = sb;
+		this.dl = dl;
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		JLabel stepDisplay = new JLabel(""+stepNr);
 		panel.add(new JLabel("Witamy na oœrodku!"), "wrap");
 //		panel.add(new JLabel(" "), "wrap");
+		System.out.println("sprawdzam dl w theView: "+dl.getText());
 		panel.add(dl, "wrap, gaptop 10, gapleft 10");
 		this.next = new JButton("Kolejny Krok");
 		next.addActionListener(this);
@@ -40,13 +44,27 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+	
+
+
+	public int getStepNr() {
+		return stepNr;
+	}
+
+
+
+	public void setStepNr(int stepNr) {
+		this.stepNr = stepNr;
+		System.out.println("ustawiam stepNr - TV, metoda set... "+this.stepNr);
+	}
+
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Kolejny Krok"))	{
-			System.out.println(this.getClass().toString()+" akcja "+stepNr);
-			new EnterForm((stepNr+1), sb, this);
+			System.out.println(this.getClass().toString()+" TheView - odpalam Form z "+stepNr);
+			new EnterForm((stepNr+1), sb, this, dl);
 		}
 		
 	}
@@ -56,7 +74,7 @@ public class TheView extends JFrame implements ActionListener, PropertyChangeLis
 	public void propertyChange(PropertyChangeEvent evt) {
 		int newStep = (int) evt.getNewValue();
 		
-		System.out.println("propChange ---> newStep = "+newStep);
+		System.out.println("propChange - s³ucham ---> newStep = "+newStep);
 		
 	}
 	

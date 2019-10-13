@@ -1,4 +1,7 @@
-package pl.auk.front2;
+package pl.auk.java.beans.front2;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,7 +15,7 @@ import com.sun.xml.internal.ws.policy.Policy;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements PropertyChangeListener {
 	
 	private StepsView sv;
 	
@@ -60,6 +63,13 @@ public class MainWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+		System.out.println("MaiWindow s³yszy "+evt.getPropertyName());
+		
 	}
 
 }

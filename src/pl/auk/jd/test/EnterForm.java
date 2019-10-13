@@ -20,20 +20,23 @@ public class EnterForm extends JFrame implements ActionListener {
 	private StepBean sb;
 	private TheView theView;
 	
-	public EnterForm(int stepN, StepBean sb, TheView theView)	{
+	private DynamicLabel dl;
+	
+	public EnterForm(int stepN, StepBean sb, TheView theView, DynamicLabel dl)	{
 		super("zmieniam krok");
-		this.stepNr = stepNr;
+		this.stepNr = stepN;
 		this.sb = sb;
 		this.theView = theView;
+		this.dl = dl;
 		
-		System.out.println(stepNr);
+		System.out.println("EnterForm - StepNr z konstruktora - "+stepNr);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("Formularz zmiany"), "wrap, gapbottom 20, gapleft 20");
 		
-		pole = new JTextField(stepNr+"");
-		
+		pole = new JTextField(10);
+		pole.setText(""+stepNr);
 		setStep = new JButton("zapisz");
 		setStep.addActionListener(this);
 		
@@ -59,10 +62,13 @@ public class EnterForm extends JFrame implements ActionListener {
 		if(e.getActionCommand().equals("zapisz"))	{
 			
 			int stepToSave = Integer.parseInt(pole.getText());
-			System.out.println("zapisujê "+ stepToSave);
-			sb.setStepNr(stepToSave);
-			theView.dispose();
-			new TheView(stepToSave,sb);
+			System.out.println("EnterForm - zapisujê "+ stepToSave);
+//			sb.setStepNr(stepToSave);
+			dl.setDl(stepToSave);
+			theView.setStepNr(stepToSave);
+//			theView.setStepNr(stepToSave);
+//			theView.dispose();
+//			new TheView(stepToSave,sb, null);
 		}
 		
 	}

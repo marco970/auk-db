@@ -34,10 +34,21 @@ public class ListBean {
 		
 		System.out.println("tamtestuje"+listSteps2.getClass()+listSteps2.size());
 		System.out.println("tamtestuje2"+listSteps.getClass()+listSteps.size());
+		
+		this.getPCListeners();
 
 		propertyChange.firePropertyChange("listSteps", oldListSteps, listSteps);
-		
 	}
+	
+	
+	public void getPCListeners()	{
+		PropertyChangeListener[] pcl = propertyChange.getPropertyChangeListeners();
+		
+		for(PropertyChangeListener el: pcl) {
+			System.out.println(el.getClass());
+		}
+	}
+	
 	
 	public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChange.addPropertyChangeListener(listener);

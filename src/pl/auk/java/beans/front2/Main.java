@@ -29,7 +29,7 @@ public class Main {
 		
 		ListBean lb = new ListBean(aukcja);
 		
-		System.out.println("uwaga main "+lb.toString());
+		System.out.println("main lb "+lb.toString());
 		
 		PropertyTest pt = new PropertyTest();
 //		
@@ -38,7 +38,10 @@ public class Main {
 		
 		lb.addPropertyChangeListener(sv);
 
-		new MainWindow(sv);
+		MainWindow mw = new MainWindow(sv);
+		lb.addPropertyChangeListener(mw);
+		
+		lb.getPCListeners();
 
 
 	}

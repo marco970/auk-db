@@ -6,8 +6,8 @@ public class MainStart {
 		
 		StepBean sb = new StepBean();
 		sb.setStepNr(1);
-		DynamicLabel dc = new DynamicLabel(sb.getStepNr());
-		TheView tv = new TheView(sb.getStepNr(), sb, null);
+		DynamicLabel dl = new DynamicLabel(sb.getStepNr());
+		TheView tv = new TheView(sb, dl);
 		
 		sb.addPropertyChangeListener(tv);
 		

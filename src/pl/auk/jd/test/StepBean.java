@@ -29,7 +29,7 @@ public class StepBean {
 
 	public void setStepNr(int stepNr) {
 		
-		System.out.println("jest set "+ stepNr);
+		System.out.println("bean: metoda set "+ stepNr);
 		int prevStepNr = stepNr;
 		this.stepNr = stepNr;
 		
