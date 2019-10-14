@@ -36,6 +36,10 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 	
 	public void setDynamicView(StepsView sv)	{
 		this.sv = sv;
+		this.invalidate();
+		this.validate();
+		this.repaint();
+	
 	}
 	
 	public void createGui()	{

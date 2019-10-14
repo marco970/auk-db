@@ -173,6 +173,7 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 				lb.setListBean(stepList);
 				stepsView.setDynamicContent(stepList);
 				stepsView.getMainWindowInstance().setDynamicView(stepsView);
+				
 			}
 			
 			this.dispose();
