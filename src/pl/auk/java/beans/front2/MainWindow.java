@@ -15,7 +15,7 @@ import com.sun.xml.internal.ws.policy.Policy;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainWindow extends JFrame implements PropertyChangeListener {
+public class MainWindow extends JFrame {
 	
 	private StepsView sv;
 	
@@ -52,27 +52,21 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 		
 		JPanel panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelM.setLayout(new MigLayout(
-				"", 
-				"10[grow]10", 
-				"[grow, top]5[grow, top]"));
+//		panelM.setLayout(new MigLayout(
+//				"", 
+//				"10[grow]10", 
+//				"[grow, top]5[grow, top]"));
+		panelM.setLayout(new MigLayout());
 		setContentPane(panelM);
-		panelM.add(new JLabel("G³ówne Info o aukcji"), "cell 0 0");
+		panelM.add(new JLabel("G³ówne Info o aukcji"), "wrap");
 		JScrollPane scroll = new JScrollPane(sv);
-		panelM.add(scroll, "cell 0 1");
+		panelM.add(scroll);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scroll);
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		
-		System.out.println("MaiWindow s³yszy "+evt.getPropertyName());
-		
 	}
 
 }

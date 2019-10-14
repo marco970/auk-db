@@ -6,12 +6,13 @@ import java.util.List;
 import pl.auk.back.OfferEnti;
 
 
+interface DoKwadratu {
+	double doKwadratu(double n);
+}
+
 public class Main {
 
 	public static void main(String[] args) {
-		
-
-		
 
 		List<OfferEnti> krok0 = new ArrayList<>();
 		krok0.add(new OfferEnti(0, "Nokia", 1000));
@@ -29,19 +30,20 @@ public class Main {
 		
 		ListBean lb = new ListBean(aukcja);
 		
-		System.out.println("main lb "+lb.toString());
-		
-		PropertyTest pt = new PropertyTest();
-//		
-		lb.addPropertyChangeListener(pt);
+//		System.out.println("main lb "+lb.toString());
+
 		StepsView sv = new StepsView(lb);
 		
-		lb.addPropertyChangeListener(sv);
+//		lb.addPropertyChangeListener(sv);
 
 		MainWindow mw = new MainWindow(sv);
-		lb.addPropertyChangeListener(mw);
+//		lb.addPropertyChangeListener(mw);
+//		
+//		lb.getPCListeners();
+		//double n = 2;
 		
-		lb.getPCListeners();
+		DoKwadratu dkw = (n) -> n*n;
+		System.out.println(dkw.doKwadratu(2.1));
 
 
 	}

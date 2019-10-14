@@ -39,21 +39,27 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 		this.stepNr = stepList.size()-1;
 		this.minPost = 100;		//potem odczytamy to z formularza jakiegoœ
 		this.lb = lb;
-		
-		
+
 	}
 	
 	public void setDynamicContent(List<List<OfferEnti>> newStepList)	{
 		this.removeAll();
 		this.drawPanel(newStepList);
+		this.setStepList(newStepList);
+		this.setStepNr(stepList.size()-1);
 	}
 	
 	public void setMainWindowInstance(MainWindow mw)	{
 		this.mw = mw;
 	}
-	
-	
-	
+
+	public void setStepList(List<List<OfferEnti>> stepList) {
+		this.stepList = stepList;
+	}
+
+	public void setStepNr(int stepNr) {
+		this.stepNr = stepNr;
+	}
 
 	public MainWindow getMainWindowInstance() {
 		return mw;
@@ -62,7 +68,7 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	public void drawPanel(List<List<OfferEnti>> stepList)	{
 		
 		int stepNr = stepList.size();
-		System.out.println("sv drawPanel stepNr"+stepNr);
+
 		String migRow = "10";
 		for (int i = stepNr; i<1; i--)	{
 			migRow=migRow+"[grow, top]20";
@@ -75,25 +81,27 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new MigLayout("wrap 1"));
-//		buttons.add(new JLabel("buttons"));
+
 		JButton maile = new JButton("Utwórz maile");
 		JButton krok = new JButton("Kolejny krok");
 		JButton popraw = new JButton("Popraw Oferty");
+		
 		maile.addActionListener(this);
 		krok.addActionListener(this);
 		popraw.addActionListener(this);
+		
 		popraw.setPreferredSize(new Dimension(120, 10));
 		maile.setPreferredSize(new Dimension(120, 10));
 		krok.setPreferredSize(new Dimension(120, 10));
+		
 		buttons.add(maile);
 		buttons.add(krok);
 		buttons.add(popraw);
 		
+		int pozycja[] = {1, 2, 3};
 		
 		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
-//			System.out.println("first loop "+i);
-			
-//			add(new JLabel("step nr "+i), "cell 0 "+(stepNr-i));
+
 			String start;
 			if (i==stepNr)	{
 				add(buttons, "cell 1 0");
@@ -105,9 +113,9 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 			}
 			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post¹pienie "+minPost+"<br /></p></td></tr>";
 			String naglowki = "<tr><td style=\"width: 100px;\"><b>Oferent</b>"
-					+ "</td><td style=\"width: 60px;\"><b>Cena</b></td>"
-					+ "</td><td style=\"width: 100px\"><b>Cena z domiarem</b></td>"
-					+ "</td><td style=\"width: 100px\"><b>Pozycja</b></td></tr>";
+					+ "</td><td style=\"width: 60px; text-align: right;\"><b>Cena</b></td>"
+					+ "</td><td style=\"width: 100px; text-align: right;\"><b>Cena z domiarem</b></td>"
+					+ "</td><td style=\"width: 100px; text-align: center;\"><b>Pozycja</b></td></tr>";
 			String end = "</table></body></html>";
 			String middle = "";
 			
@@ -117,7 +125,10 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 				String output = myFormatter.format(stepList.get(i-1).get(j).getCena());
 //				System.out.println("--> "+stepList.get(i-1).get(j));
 				middle = middle +"<tr><td>"+stepList.get(i-1).get(j).getOferent().toString()+"</td>"
-						+ "<td style=\"text-align: right;\">"+output+"</td></tr>";
+						+ "<td style=\"text-align: right;\">"+output+"</td>"
+						+ "<td style=\"text-align: right;\">"+output+"</td>"
+						+ "<td style=\"text-align: center;\">"+pozycja[i]+"</td>"
+								+ "</tr>";
 			}
 
 			JLabel html = new JLabel(start+stepHeader+naglowki+middle+end);
@@ -129,7 +140,7 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
+//		System.out.println(e.getActionCommand()+" nr kroku "+(stepNr+1));
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
@@ -141,14 +152,14 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		
-		System.out.println("sv - a kuku???");
-		System.out.println("tutestuje sv "+evt.getNewValue().getClass());
-		List<List<OfferEnti>> newStepList = (List<List<OfferEnti>>) evt.getNewValue();
-		
-		System.out.println(this.getClass().toString()+" "+newStepList.size());
-		
-		this.removeAll();
-		drawPanel(newStepList);
+//		System.out.println("sv - a kuku???");
+//		System.out.println("tutestuje sv "+evt.getNewValue().getClass());
+//		List<List<OfferEnti>> newStepList = (List<List<OfferEnti>>) evt.getNewValue();
+//		
+//		System.out.println(this.getClass().toString()+" "+newStepList.size());
+//		
+//		this.removeAll();
+//		drawPanel(newStepList);
 		
 	}
 	

@@ -1,6 +1,7 @@
 package pl.auk.java.beans.front2;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
 
-public class StepEnterForm extends JFrame implements FocusListener, ActionListener {
+public class StepEnterForm extends JFrame implements ActionListener {
 	
 	private int stepNr;
 	
@@ -47,6 +48,10 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 	private JButton anuluj;
 	
 	
+	/*
+	 * Konieczna bêdzie optymalizacja tych wszystkich parametrów w konstruktorach....
+	 */
+	
 	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
 		super("wprowadzanie ofert dla kroku "+(stepNr));
 		stepSet.add(stepNr);
@@ -55,6 +60,8 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 		this.stepList = stepList;
 		this.lb = lb;
 		this.stepsView = stepsView;
+		
+		System.out.println("SEF - nr kroku "+stepNr);
 		
 //		System.out.println("uwaga "+lb.toString());
 		
@@ -89,10 +96,10 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 			cena.setHorizontalAlignment(SwingConstants.RIGHT);
 			cena.setPreferredSize(new Dimension(15, 20));
 			cena.setName(String.valueOf(el.getOferent()));
-			cena.addFocusListener(this);
+			
 			panel.add(cena, "w 100!");
 			
-//			message.setPreferredSize(new Dimension(200,15));
+			message.setPreferredSize(new Dimension(200,15));
 //			odstep = new JLabel("                              ");
 			panel.add(mapMessage.get(el.getOferent()), "wrap, w 150!");
 			j++;
@@ -125,21 +132,6 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 	}
 
 	@Override
-	public void focusGained(FocusEvent fg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void focusLost(FocusEvent fl) {
-//		System.out.println(fl.getComponent().getName());
-//		
-////		mapMessage.get(fl.getComponent().getName()).setText("nieprawid³owa wartoœæ!");
-//		System.out.println("FocusLost!");
-		
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("zapisz"));	{
 			List<OfferEnti> nextStep = new ArrayList<>();
@@ -149,35 +141,43 @@ public class StepEnterForm extends JFrame implements FocusListener, ActionListen
 				String newOffer=  mapJtf.get(el).getText();
 //				System.out.println("aaa- > "+el+" "+newOffer);
 				int value = Integer.valueOf(newOffer);
-				if (true)	{		//value <= mapOffer.get(el)
+				if (value <= mapOffer.get(el))	{		//value <= mapOffer.get(el)
 					OfferEnti oe = new OfferEnti(stepNr, el, value);
 					nextStep.add(oe);
 					System.out.println("SEF error 2 "+err+"--> "+lb.toString()+" "+oe.getCena());
-
+					mapMessage.get(el).setText("");
 				}
 				else	{
 					mapMessage.get(el).setText("nieprawid³owa wartoœæ!");
+					mapMessage.get(el).setForeground(Color.RED);
 					err = true;
 				}
 			}
 			
-			if (true) {
+			if (!err) {
 				stepList.add(nextStep);
 				
-				for (List<OfferEnti> elD: stepList)	{
-					for (OfferEnti eld: elD)	{
+//				for (List<OfferEnti> elD: stepList)	{
+//					for (OfferEnti eld: elD)	{
 //						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
-					}
-				}
+//					}
+//				}
 				System.out.println("SEF error 3 "+err+"--> "+lb.toString()+stepList.size());
+				
 				lb.setListBean(stepList);
+				
 				stepsView.setDynamicContent(stepList);
 				stepsView.getMainWindowInstance().setDynamicView(stepsView);
 				
+				this.dispose();
+				if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
+			}
+			else {
+				//czy potrzebne?
+				
 			}
 			
-			this.dispose();
-			if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
+
 		}
 		
 	}
