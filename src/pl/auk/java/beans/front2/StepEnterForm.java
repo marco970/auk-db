@@ -36,11 +36,10 @@ public class StepEnterForm extends JFrame implements ActionListener {
 	
 	private HashMap<String, JLabel> mapMessage;
 	
-	private HashMap<String, JTextField> mapJtf;
+	private HashMap<String, JTextField> mapJtf;		//JTextField - mapa z okienkami
 	
 	private StepsView stepsView;
-	
-	
+		
 	private JLabel message;
 	
 	private JButton zapisz;
