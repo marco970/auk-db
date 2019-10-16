@@ -1,6 +1,6 @@
 package pl.auk.java.beans.front2;
 
-public class OfferRaw {
+public class OfferRaw implements Comparable<OfferRaw> {
 	
 	private int stepNr;
 	
@@ -38,6 +38,11 @@ public class OfferRaw {
 
 	public void setCena(int cena) {
 		this.cena = cena;
+	}
+
+	@Override
+	public int compareTo(OfferRaw o) {
+		return this.cena - o.cena;
 	}
 
 }

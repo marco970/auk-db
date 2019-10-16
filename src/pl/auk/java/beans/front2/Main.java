@@ -14,17 +14,18 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		List<OfferEnti> krok0 = new ArrayList<>();
-		krok0.add(new OfferEnti(0, "Nokia", 1000));
-		krok0.add(new OfferEnti(0, "Huawei", 900));
-		krok0.add(new OfferEnti(0, "Computaris", 1100));
+		List<OfferRaw> krok0 = new ArrayList<>();
+		krok0.add(new OfferRaw(0, "Nokia", 1000));
+		krok0.add(new OfferRaw(0, "Huawei", 900));
+		krok0.add(new OfferRaw(0, "Computaris", 1100));
 
-		List<OfferEnti> krok1 = new ArrayList<>();
-		krok1.add(new OfferEnti(1, "Nokia", 900));
-		krok1.add(new OfferEnti(1, "Huawei", 800));
-		krok1.add(new OfferEnti(1, "Computaris", 800));
+		List<OfferRaw> krok1 = new ArrayList<>();
+		krok1.add(new OfferRaw(1, "Nokia", 900));
+		krok1.add(new OfferRaw(1, "Huawei", 800));
+		krok1.add(new OfferRaw(1, "Computaris", 800));
 		
 		List<List<OfferEnti>> aukcja = new ArrayList<>();
+		//tu trzeba przerobiæ krok 0 i krok 1 na 
 		aukcja.add(krok0);
 		aukcja.add(krok1);
 		
