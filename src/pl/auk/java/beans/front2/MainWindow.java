@@ -43,8 +43,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	public void createGui()	{
-		
-//		System.out.println("CreateGui ");
+
 	
 		int width = 900;
 		int height=	400;	
@@ -52,10 +51,7 @@ public class MainWindow extends JFrame {
 		
 		JPanel panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		panelM.setLayout(new MigLayout(
-//				"", 
-//				"10[grow]10", 
-//				"[grow, top]5[grow, top]"));
+
 		panelM.setLayout(new MigLayout());
 		setContentPane(panelM);
 		panelM.add(new JLabel("G³ówne Info o aukcji"), "wrap");
@@ -64,7 +60,6 @@ public class MainWindow extends JFrame {
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scroll);
 
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

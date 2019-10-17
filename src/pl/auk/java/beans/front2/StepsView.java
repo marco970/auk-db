@@ -137,6 +137,7 @@ public class StepsView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("Kolejny krok");
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
