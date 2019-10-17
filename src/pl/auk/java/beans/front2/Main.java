@@ -24,10 +24,20 @@ public class Main {
 		krok1.add(new OfferRaw(1, "Huawei", 800));
 		krok1.add(new OfferRaw(1, "Computaris", 800));
 		
+		List<OfferRaw> krok2 = new ArrayList<>();
+		krok2.add(new OfferRaw(2, "Nokia", 900));
+		krok2.add(new OfferRaw(2, "Huawei", 600));
+		krok2.add(new OfferRaw(2, "Computaris", 900));
+		
 		List<List<OfferEnti>> aukcja = new ArrayList<>();
 		//tu trzeba przerobiæ krok 0 i krok 1 na 
-		aukcja.add(krok0);
-		aukcja.add(krok1);
+//		aukcja.add(krok0);
+//		aukcja.add(krok1);
+		OfferCalc oc = new OfferCalc();
+		
+		aukcja.add(oc.getOfferEntiList(krok0));
+		aukcja.add(oc.getOfferEntiList(krok1));
+		aukcja.add(oc.getOfferEntiList(krok2));
 		
 		ListBean lb = new ListBean(aukcja);
 		

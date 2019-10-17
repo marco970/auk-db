@@ -45,4 +45,9 @@ public class OfferRaw implements Comparable<OfferRaw> {
 		return this.cena - o.cena;
 	}
 
+	@Override
+	public String toString() {
+		return "OfferRaw [stepNr=" + stepNr + ", oferent=" + oferent + ", cena=" + cena + "]";
+	}
+
 }

@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
 
-public class StepsView extends JPanel implements ActionListener, PropertyChangeListener {
+public class StepsView extends JPanel implements ActionListener {
 	
 	private List<List<OfferEnti>> stepList;
 	private List<OfferEnti> lastStep;
@@ -33,7 +33,6 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 	public StepsView(ListBean lb)	{
 		super();
 		this.stepList = lb.getListBean();
-//		System.out.println("StepsView - construct");
 		drawPanel(stepList);
 		this.lastStep = stepList.get(stepList.size()-1);
 		this.stepNr = stepList.size()-1;
@@ -98,7 +97,7 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 		buttons.add(krok);
 		buttons.add(popraw);
 		
-		int pozycja[] = {1, 2, 3};
+
 		
 		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
 
@@ -123,48 +122,26 @@ public class StepsView extends JPanel implements ActionListener, PropertyChangeL
 
 			for (int j=0; j<stepList.get(i-1).size(); j++)	{
 				String output = myFormatter.format(stepList.get(i-1).get(j).getCena());
-//				System.out.println("--> "+stepList.get(i-1).get(j));
 				middle = middle +"<tr><td>"+stepList.get(i-1).get(j).getOferent().toString()+"</td>"
 						+ "<td style=\"text-align: right;\">"+output+"</td>"
 						+ "<td style=\"text-align: right;\">"+output+"</td>"
-						+ "<td style=\"text-align: center;\">"+pozycja[i]+"</td>"
+						+ "<td style=\"text-align: center;\">"+stepList.get(i-1).get(j).getPosition()+"</td>"
 								+ "</tr>";
 			}
 
 			JLabel html = new JLabel(start+stepHeader+naglowki+middle+end);
 			html.setFont(new Font("SanSerif", Font.PLAIN, 12));
-//			html.setForeground(new Color(0xffffdd));
 			add(html, "cell 0 "+(stepNr-i));	
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		System.out.println(e.getActionCommand()+" nr kroku "+(stepNr+1));
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
 		}
 
 	}
-
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		
-//		System.out.println("sv - a kuku???");
-//		System.out.println("tutestuje sv "+evt.getNewValue().getClass());
-//		List<List<OfferEnti>> newStepList = (List<List<OfferEnti>>) evt.getNewValue();
-//		
-//		System.out.println(this.getClass().toString()+" "+newStepList.size());
-//		
-//		this.removeAll();
-//		drawPanel(newStepList);
-		
-	}
-	
-	
-	
-	
 
 }

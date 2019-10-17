@@ -40,17 +40,12 @@ public class StepEnterForm extends JFrame implements ActionListener {
 	
 	private StepsView stepsView;
 	
-	
 	private JLabel message;
 	
 	private JButton zapisz;
 	
 	private JButton anuluj;
 	
-	
-	/*
-	 * Konieczna bêdzie optymalizacja tych wszystkich parametrów w konstruktorach....
-	 */
 	
 	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
 		super("wprowadzanie ofert dla kroku "+(stepNr));
@@ -63,8 +58,6 @@ public class StepEnterForm extends JFrame implements ActionListener {
 		
 		System.out.println("SEF - nr kroku "+stepNr);
 		
-//		System.out.println("uwaga "+lb.toString());
-		
 		this.mapOffer = new HashMap<>();
 		this.mapMessage = new HashMap<>();
 		this.mapJtf = new HashMap<>();
@@ -76,7 +69,6 @@ public class StepEnterForm extends JFrame implements ActionListener {
 		
 		zapisz.addActionListener(this);
 		anuluj.addActionListener(this);
-		
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
@@ -100,7 +92,6 @@ public class StepEnterForm extends JFrame implements ActionListener {
 			panel.add(cena, "w 100!");
 			
 			message.setPreferredSize(new Dimension(200,15));
-//			odstep = new JLabel("                              ");
 			panel.add(mapMessage.get(el.getOferent()), "wrap, w 150!");
 			j++;
 		}
@@ -112,8 +103,7 @@ public class StepEnterForm extends JFrame implements ActionListener {
                 if (stepSet.contains(stepNr)) stepSet.remove(stepNr);
             }
         });
-		
-		
+
 		panel.add(anuluj, "gap 30");
 		panel.add(zapisz);
 
@@ -135,6 +125,7 @@ public class StepEnterForm extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("zapisz"));	{
 			List<OfferEnti> nextStep = new ArrayList<>();
+			List<OfferRaw> nextStepRaw = new ArrayList<>();
 			boolean err = false;
 			System.out.println("SEF error 1 "+err+"--> "+lb.toString());
 			for(String el: mapJtf.keySet())	{
@@ -142,9 +133,15 @@ public class StepEnterForm extends JFrame implements ActionListener {
 //				System.out.println("aaa- > "+el+" "+newOffer);
 				int value = Integer.valueOf(newOffer);
 				if (value <= mapOffer.get(el))	{		//value <= mapOffer.get(el)
-					OfferEnti oe = new OfferEnti(stepNr, el, value);
-					nextStep.add(oe);
-					System.out.println("SEF error 2 "+err+"--> "+lb.toString()+" "+oe.getCena());
+					OfferRaw or = new OfferRaw(stepNr, el, value);
+					
+//					OfferEnti oe = oc.getOfferEntiList(oc);
+					
+//					OfferEnti oe = new OfferEnti(stepNr, el, value);
+					
+					nextStepRaw.add(or);
+//					nextStep.add(oe);
+					System.out.println("SEF error 2 "+err+"--> "+lb.toString()+" "+or.getCena());
 					mapMessage.get(el).setText("");
 				}
 				else	{
@@ -155,13 +152,10 @@ public class StepEnterForm extends JFrame implements ActionListener {
 			}
 			
 			if (!err) {
+				OfferCalc oc = new OfferCalc();
+				nextStep = oc.getOfferEntiList(nextStepRaw);
 				stepList.add(nextStep);
-				
-//				for (List<OfferEnti> elD: stepList)	{
-//					for (OfferEnti eld: elD)	{
-//						System.out.println(" stepList "+eld.getOferent()+" "+eld.getCena());
-//					}
-//				}
+
 				System.out.println("SEF error 3 "+err+"--> "+lb.toString()+stepList.size());
 				
 				lb.setListBean(stepList);
