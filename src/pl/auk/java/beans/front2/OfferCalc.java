@@ -27,8 +27,7 @@ public class OfferCalc {
 					pos++;
 				}
 			}
-
-			
+	
 			
 			
 			
