@@ -27,9 +27,7 @@ public class OfferCalc {
 					pos++;
 				}
 			}
-//
-//			System.out.println("j "+j+" pos "+pos);
-//			System.out.println(step.get(j).toString()+" pos2 "+pos);
+
 			OfferEnti oe = new OfferEnti(
 					step.get(j).getStepNr(),
 					step.get(j).getOferent(),
