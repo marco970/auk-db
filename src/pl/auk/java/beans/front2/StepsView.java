@@ -46,6 +46,7 @@ public class StepsView extends JPanel implements ActionListener {
 		this.drawPanel(newStepList);
 		this.setStepList(newStepList);
 		this.setStepNr(stepList.size()-1);
+		this.lastStep = stepList.get(stepList.size()-1);
 	}
 	
 	public void setMainWindowInstance(MainWindow mw)	{
@@ -99,8 +100,8 @@ public class StepsView extends JPanel implements ActionListener {
 		
 
 		
-		for (int i = stepNr; i>0; i--)	{	//tyle tabel ile kroków
-
+		for (int i = stepNr; i>0; i--)	{	
+			
 			String start;
 			if (i==stepNr)	{
 				add(buttons, "cell 1 0");
@@ -138,6 +139,8 @@ public class StepsView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Kolejny krok");
+		
+		
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);

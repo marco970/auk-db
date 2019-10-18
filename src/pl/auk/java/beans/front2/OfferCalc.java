@@ -20,11 +20,16 @@ public class OfferCalc {
 		Collections.sort(step);
 
 		for(int j = 0; j<step.size()-1; j++)	{
-			int pos = j+1;
-			if (step.get(j).getCena()==step.get(j+1).getCena())	{
-				pos++;
+			int pos = 0;
+			
+			for (OfferRaw el: step)	{
+				if(step.get(j).getCena() >= el.getCena())	{
+					pos++;
+				}
 			}
-			System.out.println(step.get(j).toString()+" pos2 "+pos);
+
+			System.out.println("j "+j+" pos "+pos);
+//			System.out.println(step.get(j).toString()+" pos2 "+pos);
 			OfferEnti oe = new OfferEnti(
 					step.get(j).getStepNr(),
 					step.get(j).getOferent(),
@@ -32,7 +37,7 @@ public class OfferCalc {
 					pos);
 			stepList.add(oe);
 		}
-		System.out.println(step.get(step.size()-1).toString()+" pos2 "+step.size());
+//		System.out.println(step.get(step.size()-1).toString()+" pos2 "+step.size());
 		OfferEnti oe = new OfferEnti(
 				step.get(step.size()-1).getStepNr(),
 				step.get(step.size()-1).getOferent(),
