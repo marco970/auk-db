@@ -30,6 +30,8 @@ public class OfferCalc {
 
 			
 			
+			
+			
 			OfferEnti oe = new OfferEnti(
 					step.get(j).getStepNr(),
 					step.get(j).getOferent(),
