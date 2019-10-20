@@ -11,7 +11,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.xml.internal.ws.policy.Policy;
+
 
 import net.miginfocom.swing.MigLayout;
 

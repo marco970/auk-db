@@ -1,24 +1,21 @@
 package pl.auk.java.beans.front2;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.OfferEnti;
+import pl.auk.email.test.EmailDo;
 
+@SuppressWarnings("serial")
 public class StepsView extends JPanel implements ActionListener {
 	
 	private List<List<OfferEnti>> stepList;
@@ -138,11 +135,30 @@ public class StepsView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Kolejny krok");
+		
+		if (e.getActionCommand().equals("Utwórz maile"))	{
+			System.out.println("Utwórz maile");
+			for (OfferEnti el: lastStep)	{
+				String address = el.getOferent()+"@"+el.getOferent()+".com";
+				try {
+					new EmailDo(stepNr,
+							el.getOferent(),
+							address,
+							el.getCena(),
+							el.getPosition(),
+							100);
+				} catch (URISyntaxException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		}
 		
 		
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
+			System.out.println("Kolejny krok");
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
 		}
 
