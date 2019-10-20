@@ -3,7 +3,9 @@ package pl.auk.java.beans.front2;
 import java.util.ArrayList;
 import java.util.List;
 
+import antlr.DocBookCodeGenerator;
 import pl.auk.back.OfferEnti;
+import pl.auk.start.DBConnect;
 
 
 interface DoKwadratu {
@@ -13,6 +15,8 @@ interface DoKwadratu {
 public class Main {
 
 	public static void main(String[] args) {
+		
+		new DBConnect();
 
 		List<OfferRaw> krok0 = new ArrayList<>();
 		krok0.add(new OfferRaw(0, "Nokia", 1000));
@@ -33,7 +37,7 @@ public class Main {
 		krok2.add(new OfferRaw(2, "EPO", 1100));
 		
 		List<List<OfferEnti>> aukcja = new ArrayList<>();
-		//tu trzeba przerobiæ krok 0 i krok 1 na 
+		//tu trzeba przerobiï¿½ krok 0 i krok 1 na 
 //		aukcja.add(krok0);
 //		aukcja.add(krok1);
 		OfferCalc oc = new OfferCalc();
