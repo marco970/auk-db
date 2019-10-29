@@ -25,7 +25,7 @@ USE `aukcja-db`;
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `aukcje`
+-- Struktura tabeli dla tabeli `aukcje`   
 --
 
 CREATE TABLE IF NOT EXISTS `aukcje` (
