@@ -66,21 +66,7 @@ CREATE TABLE IF NOT EXISTS `bidders` (
 -- Zrzut danych tabeli `bidders`
 --
 
---INSERT INTO `bidders` (`id-bidder`, `id-aukcja`, `name`, `email`, `domiar`) VALUES
---(1, 1, 'EPO', 'epo1@epo.com', 0),
---(2, 1, 'HUA', 'hua@hua.com', 0),
---(3, 1, 'Nokia', 'nokia@nokia.com', 0),
---(4, 2, 'EPO', 'epo@epo.com', 20),
---(5, 2, 'ZTE', 'zte@zte.com', 0),
---(6, 3, 'Computaris', 'c@compt.com', 0),
---(7, 3, 'Asseco', 'ass@ass.com', 0),
---(8, 2, 'Asseco', 'ass@ass.com', 0);
 
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `bids`
---
 
 CREATE TABLE IF NOT EXISTS `bids` (
   `id-bid` int(11) NOT NULL AUTO_INCREMENT,
