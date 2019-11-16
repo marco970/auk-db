@@ -33,7 +33,7 @@ public class StepsView extends JPanel implements ActionListener {
 		drawPanel(stepList);
 		this.lastStep = stepList.get(stepList.size()-1);
 		this.stepNr = stepList.size()-1;
-		this.minPost = 100;		//potem odczytamy to z formularza jakiegoœ
+		this.minPost = 100;		//potem odczytamy to z formularza jakiegoï¿½
 		this.lb = lb;
 
 	}
@@ -79,7 +79,7 @@ public class StepsView extends JPanel implements ActionListener {
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new MigLayout("wrap 1"));
 
-		JButton maile = new JButton("Utwórz maile");
+		JButton maile = new JButton("UtwÃ³rz maile");
 		JButton krok = new JButton("Kolejny krok");
 		JButton popraw = new JButton("Popraw Oferty");
 		
@@ -108,7 +108,7 @@ public class StepsView extends JPanel implements ActionListener {
 				start = "<html><body><table style=\"width: 100%; height: 0; border: 0px solid #000000; padding-top: 10px;\" cellpadding=\"1\" cellspacing=\"0\">";
 				
 			}
-			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post¹pienie "+minPost+"<br /></p></td></tr>";
+			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne postï¿½pienie "+minPost+"<br /></p></td></tr>";
 			String naglowki = "<tr><td style=\"width: 100px;\"><b>Oferent</b>"
 					+ "</td><td style=\"width: 60px; text-align: right;\"><b>Cena</b></td>"
 					+ "</td><td style=\"width: 100px; text-align: right;\"><b>Cena z domiarem</b></td>"
@@ -136,8 +136,8 @@ public class StepsView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getActionCommand().equals("Utwórz maile"))	{
-			System.out.println("Utwórz maile");
+		if (e.getActionCommand().equals("UtwÃ³rz maile"))	{
+			System.out.println("UtwÃ³rz maile");
 			for (OfferEnti el: lastStep)	{
 				String address = el.getOferent()+"@"+el.getOferent()+".com";
 				try {

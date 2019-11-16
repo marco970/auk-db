@@ -21,7 +21,7 @@ public class MainWindow extends JFrame {
 	
 	public MainWindow(StepsView sv) 	{
 		
-		super("Aukcja - okno g≥Ûwne");
+		super("Aukcja - okno g≈Ç√≥wne");
 		setDynamicView(sv);
 		sv.setMainWindowInstance(this);
 		
@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
 
 		panelM.setLayout(new MigLayout());
 		setContentPane(panelM);
-		panelM.add(new JLabel("G≥Ûwne Info o aukcji"), "wrap");
+		panelM.add(new JLabel("G≈Ç√≥wne Info o aukcji"), "wrap");
 		JScrollPane scroll = new JScrollPane(sv);
 		panelM.add(scroll);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

@@ -145,7 +145,7 @@ public class StepEnterForm extends JFrame implements ActionListener {
 					mapMessage.get(el).setText("");
 				}
 				else	{
-					mapMessage.get(el).setText("nieprawid³owa wartoœæ!");
+					mapMessage.get(el).setText("nieprawidÅ‚owa wartoÅ›Ä‡!");
 					mapMessage.get(el).setForeground(Color.RED);
 					err = true;
 				}
