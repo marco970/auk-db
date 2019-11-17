@@ -1,11 +1,8 @@
 package pl.auk.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="steps")
@@ -16,8 +13,18 @@ public class Steps {
 	@Column(name="id-step")
 	private int idStep;
 	
-	@Column(name="id-aukcja")
-	private int idAukcja;
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="id-aukcja")
+	private Aukcje aukcja;
+	
+	@OneToMany(mappedBy="step",
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Bids> bids;
+	
+//	@Column(name="id-aukcja")
+//	private int idAukcja;
 	
 	@Column(name="krok-nr")
 	private int krokNr;
@@ -27,25 +34,12 @@ public class Steps {
 
 
 	public Steps() {
-		super();
 	}
 
-
-	public Steps(int idAukcja, int krokNr, int minPost) {
+	public Steps(int krokNr, int minPost) {
 		super();
-		this.idAukcja = idAukcja;
 		this.krokNr = krokNr;
 		this.minPost = minPost;
-	}
-
-
-	public int getIdAukcja() {
-		return idAukcja;
-	}
-
-
-	public void setIdAukcja(int idAukcja) {
-		this.idAukcja = idAukcja;
 	}
 
 
@@ -72,13 +66,32 @@ public class Steps {
 	public int getIdStep() {
 		return idStep;
 	}
+	
+	public Aukcje getAukcja () {
+		return aukcja;
+	}
 
+
+	public void setAukcja(Aukcje aukcje) {
+		this.aukcja = aukcje;
+	}
+	
+	public void add(Bids bid)	{
+		if (bids == null)	{
+			bids = new ArrayList<>();
+		}
+		bids.add(bid);
+		
+		bid.setStep(this);
+	}
 
 	@Override
 	public String toString() {
-		return "Steps [idStep=" + idStep + ", idAukcja=" + idAukcja + ", krokNr=" + krokNr + ", minPost=" + minPost
-				+ "]";
+		return "Steps [idStep=" + idStep + ", krokNr=" + krokNr + ", minPost=" + minPost + "]";
 	}
+	
+
+
 	
 	
 	

@@ -1,11 +1,9 @@
 package pl.auk.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.*;
+
+import javax.persistence.*;
+
 
 @Entity
 @Table(name="bids")
@@ -16,14 +14,22 @@ public class Bids {
 	@Column(name="id-bid")	
 	private int idBid;
 	
-	@Column(name="id-bidder")
-	private int idBidder;
+//	@Column(name="id-bidder")
+//	private int idBidder;
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="id-bidder")
+	private Bidders bidder;
 	
-	@Column(name="id-step")
-	private int idStep;
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="id-aukcja")
+	private Steps step;
 	
-	@Column(name="min-post")
-	private int minPost;
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="id-aukcja")
+	private Aukcje aukcja;
 	
 	@Column(name="cena")
 	private int cena;
@@ -31,101 +37,74 @@ public class Bids {
 	@Column(name="pozycja")
 	private int pozycja; 
 	
-	@Column(name="id-aukcja")
-	private int idAukcja;
 	
-	
-	public Bids()	{
-		
+	public Bids()	{	
 	}
-
-
-	public Bids(int idBidder, int idStep, int minPost, int cena, int pozycja, int idAukcja) {
+	
+	public Bids(int cena, int pozycja) {
 		super();
-		this.idBidder = idBidder;
-		this.idStep = idStep;
-		this.minPost = minPost;
 		this.cena = cena;
 		this.pozycja = pozycja;
-		this.idAukcja = idAukcja;
 	}
-
 
 	public int getIdBid() {
 		return idBid;
 	}
 
-
 	public void setIdBid(int idBid) {
 		this.idBid = idBid;
 	}
 
-
-	public int getIdBidder() {
-		return idBidder;
+	public Bidders getBidder() {
+		return bidder;
 	}
 
-
-	public void setIdBidder(int idBidder) {
-		this.idBidder = idBidder;
+	public void setBidder(Bidders bidder) {
+		this.bidder = bidder;
 	}
 
-
-	public int getIdStep() {
-		return idStep;
+	public Steps getStep() {
+		return step;
 	}
 
-
-	public void setIdStep(int idStep) {
-		this.idStep = idStep;
+	public void setStep(Steps step) {
+		this.step = step;
 	}
 
-
-	public int getMinPost() {
-		return minPost;
+	public Aukcje getAukcja() {
+		return aukcja;
 	}
 
-
-	public void setMinPost(int minPost) {
-		this.minPost = minPost;
+	public void setAukcja(Aukcje aukcja) {
+		this.aukcja = aukcja;
 	}
-
 
 	public int getCena() {
 		return cena;
 	}
 
-
 	public void setCena(int cena) {
 		this.cena = cena;
 	}
-
 
 	public int getPozycja() {
 		return pozycja;
 	}
 
-
 	public void setPozycja(int pozycja) {
 		this.pozycja = pozycja;
 	}
 
-
-	public int getIdAukcja() {
-		return idAukcja;
-	}
-
-
-	public void setIdAukcja(int idAukcja) {
-		this.idAukcja = idAukcja;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Bids [idBid=" + idBid + ", idBidder=" + idBidder + ", idStep=" + idStep + ", minPost=" + minPost
-				+ ", cena=" + cena + ", pozycja=" + pozycja + ", idAukcja=" + idAukcja + "]";
+		return "Bids [idBid=" + idBid + ", bidder=" + bidder + ", step=" + step + ", aukcja=" + aukcja + ", cena="
+				+ cena + ", pozycja=" + pozycja + "]";
 	}
+
+
+	
+
+
 	
 	
 	
