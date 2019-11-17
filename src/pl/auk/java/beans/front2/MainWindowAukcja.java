@@ -1,8 +1,5 @@
 package pl.auk.java.beans.front2;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,11 +12,12 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainWindow extends JFrame {
+@SuppressWarnings("serial")
+public class MainWindowAukcja extends JFrame {
 	
 	private StepsView sv;
 	
-	public MainWindow(StepsView sv) 	{
+	public MainWindowAukcja(StepsView sv) 	{
 		
 		super("Aukcja - okno główne");
 		setDynamicView(sv);

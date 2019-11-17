@@ -25,7 +25,7 @@ public class StepsView extends JPanel implements ActionListener {
 	
 	private int minPost;
 	
-	private MainWindow mw = null;
+	private MainWindowAukcja mw = null;
 	
 	public StepsView(ListBean lb)	{
 		super();
@@ -46,7 +46,7 @@ public class StepsView extends JPanel implements ActionListener {
 		this.lastStep = stepList.get(stepList.size()-1);
 	}
 	
-	public void setMainWindowInstance(MainWindow mw)	{
+	public void setMainWindowInstance(MainWindowAukcja mw)	{
 		this.mw = mw;
 	}
 
@@ -58,7 +58,7 @@ public class StepsView extends JPanel implements ActionListener {
 		this.stepNr = stepNr;
 	}
 
-	public MainWindow getMainWindowInstance() {
+	public MainWindowAukcja getMainWindowInstance() {
 		return mw;
 	}
 
@@ -108,7 +108,7 @@ public class StepsView extends JPanel implements ActionListener {
 				start = "<html><body><table style=\"width: 100%; height: 0; border: 0px solid #000000; padding-top: 10px;\" cellpadding=\"1\" cellspacing=\"0\">";
 				
 			}
-			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne post�pienie "+minPost+"<br /></p></td></tr>";
+			String stepHeader = "<tr><td colspan=\"4\" style=\"height: 30px; vertical-align: top;\"><p><b>step nr "+(i-1)+"</b><br />minimalne postąpienie "+minPost+"<br /></p></td></tr>";
 			String naglowki = "<tr><td style=\"width: 100px;\"><b>Oferent</b>"
 					+ "</td><td style=\"width: 60px; text-align: right;\"><b>Cena</b></td>"
 					+ "</td><td style=\"width: 100px; text-align: right;\"><b>Cena z domiarem</b></td>"

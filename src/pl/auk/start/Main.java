@@ -1,11 +1,15 @@
-package pl.auk.java.beans.front2;
+package pl.auk.start;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import antlr.DocBookCodeGenerator;
 import pl.auk.back.OfferEnti;
-import pl.auk.start.DBConnect;
+import pl.auk.java.beans.front2.ListBean;
+import pl.auk.java.beans.front2.MainWindowAukcja;
+import pl.auk.java.beans.front2.OfferCalc;
+import pl.auk.java.beans.front2.OfferRaw;
+import pl.auk.java.beans.front2.StepsView;
 
 
 interface DoKwadratu {
@@ -17,6 +21,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		new DBConnect();
+		
+		
 
 		List<OfferRaw> krok0 = new ArrayList<>();
 		krok0.add(new OfferRaw(0, "Nokia", 1000));
@@ -54,7 +60,7 @@ public class Main {
 		
 //		lb.addPropertyChangeListener(sv);
 
-		MainWindow mw = new MainWindow(sv);
+		MainWindowAukcja mw = new MainWindowAukcja(sv);
 //		lb.addPropertyChangeListener(mw);
 //		
 //		lb.getPCListeners();
