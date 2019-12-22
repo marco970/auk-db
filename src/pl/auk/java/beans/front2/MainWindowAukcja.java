@@ -1,7 +1,14 @@
 package pl.auk.java.beans.front2;
 
+import java.awt.MenuItem;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -13,13 +20,13 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
-public class MainWindowAukcja extends JFrame {
+public class MainWindowAukcja extends JFrame implements ActionListener {
 	
 	private StepsView sv;
 	
 	public MainWindowAukcja(StepsView sv) 	{
 		
-		super("Aukcja - okno główne");
+		super("Aukcja - okno aukcji");
 		setDynamicView(sv);
 		sv.setMainWindowInstance(this);
 		
@@ -47,6 +54,9 @@ public class MainWindowAukcja extends JFrame {
 		int height=	400;	
 		setSize(width, height);
 		
+
+		
+		
 		JPanel panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -58,8 +68,16 @@ public class MainWindowAukcja extends JFrame {
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scroll);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

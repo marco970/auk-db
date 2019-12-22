@@ -10,13 +10,8 @@ public class Steps {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id-step")
+	@Column(name="id_step")
 	private int idStep;
-	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-aukcja")
-	private Aukcje aukcja;
 	
 	@OneToMany(mappedBy="step",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
@@ -26,10 +21,10 @@ public class Steps {
 //	@Column(name="id-aukcja")
 //	private int idAukcja;
 	
-	@Column(name="krok-nr")
+	@Column(name="krok_nr")
 	private int krokNr;
 	
-	@Column(name="min-change")
+	@Column(name="min_change")
 	private int minPost;
 
 
@@ -67,14 +62,6 @@ public class Steps {
 		return idStep;
 	}
 	
-	public Aukcje getAukcja () {
-		return aukcja;
-	}
-
-
-	public void setAukcja(Aukcje aukcje) {
-		this.aukcja = aukcje;
-	}
 	
 	public void add(Bids bid)	{
 		if (bids == null)	{

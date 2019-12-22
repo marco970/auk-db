@@ -10,13 +10,13 @@ public class Bidders {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id-bidder")
+	@Column(name="id_bidder")
 	private int idBidder; 
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-aukcja")
-	private Aukcje aukcje;
+	@JoinColumn(name="id_aukcja")
+	private Aukcje aukcja;
 	
 	@Column(name="name")
 	private String name;
@@ -27,10 +27,10 @@ public class Bidders {
 	@Column(name="domiar")
 	private int domiar;
 	
-	@OneToMany(mappedBy="bidder",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Bids> bids;
+//	@OneToMany(mappedBy="bidder",
+//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//						 CascadeType.DETACH, CascadeType.REFRESH})
+//	private List<Bids> bids;
 
 	
 	public Bidders() {
@@ -76,31 +76,31 @@ public class Bidders {
 		this.domiar = domiar;
 	}
 
-	public List<Bids> getBids() {
-		return bids;
-	}
-
-	public void setBids(List<Bids> bids) {
-		this.bids = bids;
-	}
+//	public List<Bids> getBids() {
+//		return bids;
+//	}
+//
+//	public void setBids(List<Bids> bids) {
+//		this.bids = bids;
+//	}
 
 	public Aukcje getAukcja() {
-		return aukcje;
+		return aukcja;
 	}
 
 
 	public void setAukcja(Aukcje aukcje) {
-		this.aukcje = aukcje;
+		this.aukcja = aukcje;
 	}
 	
-	public void add(Bids bid)	{
-		if (bids == null)	{
-			bids = new ArrayList<>();
-		}
-		bids.add(bid);
-		
-		bid.setBidder(this);
-	}
+//	public void add(Bids bid)	{
+//		if (bids == null)	{
+//			bids = new ArrayList<>();
+//		}
+//		bids.add(bid);
+//		
+//		bid.setBidder(this);
+//	}
 	
 
 

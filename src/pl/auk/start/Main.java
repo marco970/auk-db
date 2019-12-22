@@ -3,8 +3,13 @@ package pl.auk.start;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.hibernate.SessionFactory;
+
 import antlr.DocBookCodeGenerator;
 import pl.auk.back.OfferEnti;
+import pl.auk.back.ReadAukcje;
+import pl.auk.java.beans.front2.AukcjomatView;
 import pl.auk.java.beans.front2.ListBean;
 import pl.auk.java.beans.front2.MainWindowAukcja;
 import pl.auk.java.beans.front2.OfferCalc;
@@ -20,7 +25,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		new DBConnect();
+		DBConnect dbc = new DBConnect();
 		
 		
 
@@ -60,7 +65,22 @@ public class Main {
 		
 //		lb.addPropertyChangeListener(sv);
 
-		MainWindowAukcja mw = new MainWindowAukcja(sv);
+//		MainWindowAukcja mw = new MainWindowAukcja(sv);
+		
+		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+		PropertyConfigurator.configure(log4jConfPath);
+		SessionFactory factory = new SeFaStart().getFactory();
+		
+		
+		
+		new AukcjomatView();
+		factory.close();
+		
+		
+		
+		
+		
+		
 //		lb.addPropertyChangeListener(mw);
 //		
 //		lb.getPCListeners();

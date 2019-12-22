@@ -5,52 +5,71 @@ import java.util.List;
 import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import pl.auk.entities.Aukcje;
+import pl.auk.entities.Bidders;
 import pl.auk.start.SeFaStart;
 
 public class ReadAukcje {
 	
+	private List<Aukcje> aukcje;
+	
+	private List<Bidders> bidders;
+	
+	@SuppressWarnings("unchecked")
 	public ReadAukcje(SessionFactory factory) {
 		
+		
 		if (factory==null)	{
+			System.out.println("Uwaga, nowe factory");
 			factory = new SeFaStart().getFactory();
 		}
-		
 		
 		try	{
 			Session session = factory.getCurrentSession();
 			session.beginTransaction();
-			List<Aukcje> aukcje = session
+			this.aukcje = session
 					.createQuery("from Aukcje")
+					.getResultList();
+			String nrAukcji = 1+"";
+			this.bidders = session
+					.createQuery("from Bidders b where b.aukcja = '"+nrAukcji+"'")
 					.getResultList();
 		
 			session.getTransaction().commit();	
+
+			displayResults(aukcje);
 			
-			for(Aukcje el: aukcje)	{
-				System.out.println(el);
-		}
-			
-			
-			
+			displayResults(bidders);
+	
 		}
 		finally {
 			factory.close();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args) {
-		
-		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-		PropertyConfigurator.configure(log4jConfPath);
-		SessionFactory factory = new SeFaStart().getFactory();
-		new ReadAukcje(factory);
-		
+
+	private <T> void displayResults(List<T> aukcje) {
+		for(T el: aukcje)	{
+			System.out.println(el);
+		}
 	}
+
+	public List<Aukcje> getAukcje() {
+		return aukcje;
+	}
+
+	public List<Bidders> getBidders() {
+		return bidders;
+	}
+	
+
+//	public static void main(String[] args) {
+//		
+//		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+//		PropertyConfigurator.configure(log4jConfPath);
+//		SessionFactory factory = new SeFaStart().getFactory();
+//		new ReadAukcje(factory);
+//		factory.close();
+//		
+//	}
 
 }

@@ -19,7 +19,7 @@ public class Aukcje {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id-aukcja")
+	@Column(name="id_aukcja")
 	private int idAukcja;
 
 	@Column(name="name")
@@ -28,29 +28,23 @@ public class Aukcje {
 	@Column(name="opis")
 	private String opisAuk;
 	
-	@Column(name="data-create")
+	@Column(name="data_conf")
 	private String dataCreateAuk;
 	
-	@Column(name="data-start")
+	@Column(name="data_end")
 	private String dataStartAk;
 	
 	@Column(name="waluta")
 	private String waluta;
 	
-	@OneToMany(mappedBy="aukcje",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Bidders> bidders;
+
 	
-	@OneToMany(mappedBy="aukcje",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Steps> steps;
+//	@OneToMany(mappedBy="aukcja",
+//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//						 CascadeType.DETACH, CascadeType.REFRESH})
+//	private List<Bidders> bidders;
 	
-	@OneToMany(mappedBy="aukcje",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Bids> bids;
+
 	
 
 
@@ -58,6 +52,7 @@ public class Aukcje {
 	}
 
 	public Aukcje(String nazwaAuk, String opisAuk, String dataCreateAuk, String dataStartAk, String waluta) {
+//	public Aukcje(String nazwaAuk) {
 		this.nazwaAuk = nazwaAuk;
 		this.opisAuk = opisAuk;
 		this.dataCreateAuk = dataCreateAuk;
@@ -126,60 +121,37 @@ public class Aukcje {
 	public void setWaluta(String waluta) {
 		this.waluta = waluta;
 	}
-
-	public List<Bidders> getBidders() {
-		return bidders;
-	}
-
-
-	public void setBidders(List<Bidders> bidders) {
-		this.bidders = bidders;
-	}
-
-
-	public void add(Bidders bidder)	{
-		if(bidders == null)	{
-			bidders = new ArrayList<>();
-		}
-		bidders.add(bidder);
-		bidder.setAukcja(this);
-	}
 	
-	public List<Steps> getSteps() {
-		return steps;
-	}
-
-	public void setSteps(List<Steps> steps) {
-		this.steps = steps;
-	}
 	
-	public void add(Steps step)	{
-		if(steps == null)	{
-			steps = new ArrayList<>();
-		}
-		steps.add(step);
-		step.setAukcja(this);
-	}
 
-	public List<Bids> getBids() {
-		return bids;
-	}
-
-	public void setBids(List<Bids> bids) {
-		this.bids = bids;
-	}
+//	public List<Bidders> getBidders() {
+//		return bidders;
+//	}
+//
+//
+//	public void setBidders(List<Bidders> bidders) {
+//		this.bidders = bidders;
+//	}
+//
+//
+//	public void add(Bidders bidder)	{
+//		if(bidders == null)	{
+//			bidders = new ArrayList<>();
+//		}
+//		bidders.add(bidder);
+//		bidder.setAukcja(this);
+//	}
+//	
 	
-	public void add(Bids bid)	{
-		if(bids == null)	{
-			bids = new ArrayList<>();
-		}
-		bids.add(bid);
-		bid.setAukcja(this);
-	}
 
 	@Override
 	public String toString() {
 		return "Aukcje [idAukcja=" + idAukcja + ", nazwaAuk=" + nazwaAuk + ", opisAuk=" + opisAuk + ", dataCreateAuk="
 				+ dataCreateAuk + ", dataStartAk=" + dataStartAk + ", waluta=" + waluta + "]";
 	}	
+
+
+//	public String toString() {
+//		return "Aukcje [idAukcja=" + idAukcja + ", nazwaAuk=" + nazwaAuk + "]";
+//	}	
 }

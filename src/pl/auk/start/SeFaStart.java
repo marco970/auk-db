@@ -8,7 +8,7 @@ import pl.auk.entities.*;
 public class SeFaStart {
 	
 	
-	private SessionFactory factory;
+	private static SessionFactory factory;
 	
 	public SeFaStart()	{
 	
@@ -16,12 +16,12 @@ public class SeFaStart {
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(Aukcje.class)
 			.addAnnotatedClass(Bidders.class)
-			.addAnnotatedClass(Bids.class)
-			.addAnnotatedClass(Steps.class)
+//			.addAnnotatedClass(Bids.class)
+//			.addAnnotatedClass(Steps.class)
 			.buildSessionFactory();
 	}
 
-	public SessionFactory getFactory() {
+	public static SessionFactory getFactory() {
 		return factory;
 	}
 	

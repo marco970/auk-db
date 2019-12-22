@@ -23,13 +23,10 @@ public class Bids {
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-aukcja")
+	@JoinColumn(name="id-step")
 	private Steps step;
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-aukcja")
-	private Aukcje aukcja;
+
 	
 	@Column(name="cena")
 	private int cena;
@@ -71,14 +68,6 @@ public class Bids {
 		this.step = step;
 	}
 
-	public Aukcje getAukcja() {
-		return aukcja;
-	}
-
-	public void setAukcja(Aukcje aukcja) {
-		this.aukcja = aukcja;
-	}
-
 	public int getCena() {
 		return cena;
 	}
@@ -97,7 +86,7 @@ public class Bids {
 
 	@Override
 	public String toString() {
-		return "Bids [idBid=" + idBid + ", bidder=" + bidder + ", step=" + step + ", aukcja=" + aukcja + ", cena="
+		return "Bids [idBid=" + idBid + ", bidder=" + bidder + ", step=" + step + ", cena="
 				+ cena + ", pozycja=" + pozycja + "]";
 	}
 
