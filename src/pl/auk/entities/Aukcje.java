@@ -22,6 +22,7 @@ public class Aukcje {
 	@Column(name="id_aukcja")
 	private int idAukcja;
 
+	
 	@Column(name="name")
 	private String nazwaAuk;
 	

@@ -26,6 +26,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 	private String[] start = {"Start", "Nowa Aukcja", "Exit"};
 	private DBConnect dbc;
 	private List<Aukcje> aukcje;
+	private int iloscLinii;
 	
 	public AukcjomatView()	{
 		super("Aukcje - panel główny");
@@ -33,7 +34,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		
 		ReadAukcje ra = new ReadAukcje(SeFaStart.getFactory());
 		this.aukcje = ra.getAukcje();
-		
+		this.iloscLinii = 6+aukcje.size();
 		
 		
 		
@@ -50,7 +51,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 	
 	public void createGui()	{
 		int width = 900;
-		int height=	400;	
+		int height=	60+iloscLinii*20;	
 		setSize(width, height);
 		
 		JMenuBar mb = new JMenuBar();
@@ -109,7 +110,8 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		
 		
 		if (u.equals(start[1]))	{
-			new NewAukcjaCreate();
+			new NewAukcjaCreateForm();
+			this.dispose();
 		}
 		
 

@@ -69,12 +69,12 @@ public class Main {
 		
 		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
 		PropertyConfigurator.configure(log4jConfPath);
-		SessionFactory factory = new SeFaStart().getFactory();
-		
+		SessionFactory factory = SeFaStart.getFactory();
+		System.out.println("Session Factory : " + factory.hashCode());
 		
 		
 		new AukcjomatView();
-		factory.close();
+//		factory.close();
 		
 		
 		
@@ -86,7 +86,7 @@ public class Main {
 //		lb.getPCListeners();
 		//double n = 2;
 		
-		DoKwadratu dkw = (n) -> n*n;
+//		DoKwadratu dkw = (n) -> n*n;
 //		System.out.println(dkw.doKwadratu(2.1));
 
 

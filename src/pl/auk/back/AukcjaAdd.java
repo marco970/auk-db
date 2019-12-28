@@ -3,6 +3,7 @@ package pl.auk.back;
 import java.util.List;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -14,31 +15,30 @@ public class AukcjaAdd {
 	
 	public AukcjaAdd(Aukcje aukcja, SessionFactory factory)	{
 		
-		if (factory==null)	{
+		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
+		
+		if (factory.equals(null))	{
 			System.out.println("Uwaga, nowe factory");
-			factory = new SeFaStart().getFactory();
+			factory = SeFaStart.getFactory();
 		}
 		
-		try	{
-			Session session = factory.getCurrentSession();
-			session.beginTransaction();
-			
-			session.save(aukcja);
-
-			session.getTransaction().commit();	
-		}
-		finally {
-			factory.close();
-		}
+			try {
+				Session session = factory.getCurrentSession();
+				session.beginTransaction();
+				session.save(aukcja);
+				session.getTransaction().commit();
+			} catch (HibernateException e) {
+				e.printStackTrace();
+			}	
 
 	}
 	public static void main(String[] args) {
 		
 		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
 		PropertyConfigurator.configure(log4jConfPath);
-		SessionFactory factory = new SeFaStart().getFactory();
+		SessionFactory factory = SeFaStart.getFactory();
 		
-		Aukcje aukcja = new Aukcje("  tender", "opis opis opis", "10.12.2019", "11.12.2019","EUR");
+		Aukcje aukcja = new Aukcje("ello-tender", "opis opis opis", "", "","EUR");
 		new AukcjaAdd(aukcja, factory);
 
 		factory.close();

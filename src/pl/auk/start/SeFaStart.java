@@ -8,22 +8,30 @@ import pl.auk.entities.*;
 public class SeFaStart {
 	
 	
+
 	private static SessionFactory factory;
 	
-	public SeFaStart()	{
+	private SeFaStart() {
+	}
 	
-	this.factory = new Configuration()
-			.configure("hibernate.cfg.xml")
-			.addAnnotatedClass(Aukcje.class)
-			.addAnnotatedClass(Bidders.class)
-//			.addAnnotatedClass(Bids.class)
-//			.addAnnotatedClass(Steps.class)
-			.buildSessionFactory();
+	
+	public static synchronized SessionFactory getFactory() {
+		
+		
+
+		 if (factory == null) {
+			 
+			 
+			 Configuration configuration = new Configuration();
+			 configuration.configure("hibernate.cfg.xml");
+			 configuration.addAnnotatedClass(Aukcje.class);
+			 configuration.addAnnotatedClass(Bidders.class);
+			 factory =  configuration.buildSessionFactory();
+			 System.out.println("Session Factory(SeFa) : " + factory.hashCode());
+		 }
+		 return factory;
 	}
 
-	public static SessionFactory getFactory() {
-		return factory;
-	}
 	
 	
 	

@@ -20,8 +20,8 @@ public class RawForm extends JFrame implements ActionListener {
 	public RawForm(String title, String[] start)	{
 		super(title);
 		this.start = start;
-		int width = 900;
-		int height=	400;	
+		int width = 500;
+		int height=	300;	
 		setSize(width, height);
 		
 		

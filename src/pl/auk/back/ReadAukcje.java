@@ -3,6 +3,7 @@ package pl.auk.back;
 import java.util.List;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import pl.auk.entities.Aukcje;
@@ -21,31 +22,30 @@ public class ReadAukcje {
 		
 		if (factory==null)	{
 			System.out.println("Uwaga, nowe factory");
-			factory = new SeFaStart().getFactory();
+			factory = SeFaStart.getFactory();
 		}
-		
-		try	{
-			Session session = factory.getCurrentSession();
-			session.beginTransaction();
-			this.aukcje = session
-					.createQuery("from Aukcje")
-					.getResultList();
-			String nrAukcji = 1+"";
-			this.bidders = session
-					.createQuery("from Bidders b where b.aukcja = '"+nrAukcji+"'")
-					.getResultList();
-		
-			session.getTransaction().commit();	
 
-			displayResults(aukcje);
-			
-			displayResults(bidders);
+			try {
+				Session session = factory.getCurrentSession();
+				session.beginTransaction();
+				this.aukcje = session
+						.createQuery("from Aukcje")
+						.getResultList();
+				String nrAukcji = 1+"";
+				this.bidders = session
+						.createQuery("from Bidders b where b.aukcja = '"+nrAukcji+"'")
+						.getResultList();
+
+				session.getTransaction().commit();	
+
+				displayResults(aukcje);
+				displayResults(bidders);
+			} catch (HibernateException e) {
+				e.printStackTrace();
+			}
+		}
+
 	
-		}
-		finally {
-			factory.close();
-		}
-	}
 
 	private <T> void displayResults(List<T> aukcje) {
 		for(T el: aukcje)	{
