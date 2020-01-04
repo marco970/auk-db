@@ -1,11 +1,15 @@
-package pl.auk.jd.test;
+package pl.auk.jd.test.form;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class FormInput {
+import pl.auk.java.beans.front2.RawForm;
+
+public class FormInput extends RawForm {
 	
 	private String nazwa;
 	
@@ -14,17 +18,25 @@ public class FormInput {
 	private List<Method> methValidacji;
 	
 	private List<String> errMessages;
+	
+	private static String[] start = {"Start", "Exit"};
 
-	public FormInput(String nazwa, JComponent component, List<Method> methValidacji, List<String> errMessages) {
-		super();
+	public FormInput(String nazwa, JComponent component) {
+		super("formularz testowy", start);
 		this.nazwa = nazwa;
 		this.component = component;
-		this.methValidacji = methValidacji;
-		this.errMessages = errMessages;
+//		this.methValidacji = methValidacji;
+//		this.errMessages = errMessages;
 		
-		if (methValidacji.size()!=errMessages.size()) {
-			System.out.println("******* Błędne dane walidacji");
-		}
+		System.out.println("konstruktor a");
+		
+//		if (methValidacji.size()!=errMessages.size()) {
+//			System.out.println("******* Błędne dane walidacji");
+//		}
+		
+		JPanel panelInherited = super.panelM;
+		
+		
 
 	}
 
@@ -62,7 +74,13 @@ public class FormInput {
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		
+		String nazwa = "test 1";
+		JTextField ta = new JTextField(15);
+		
+		
+		new FormInput(nazwa, ta);
 
 	}
 

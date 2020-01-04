@@ -24,7 +24,7 @@ public class RawForm extends JFrame implements ActionListener {
 		int height=	300;	
 		setSize(width, height);
 		
-		
+		System.out.println("konstruktor b");
 		
 		this.panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));

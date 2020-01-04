@@ -1,4 +1,4 @@
-package pl.auk.jd.test;
+package pl.auk.jd.test.form;
 
 import java.lang.reflect.Method;
 import java.util.List;
