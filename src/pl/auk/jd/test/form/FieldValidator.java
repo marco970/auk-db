@@ -2,7 +2,7 @@ package pl.auk.jd.test.form;
 
 public interface FieldValidator {
 
-	boolean validate();
-	String getErrMessage();
+	boolean validate(FormFieldData testedValue);
+	String getErrMessage(FormFieldData testedValue);
 
 }

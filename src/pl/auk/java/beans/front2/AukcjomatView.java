@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.ReadAukcje;
 import pl.auk.entities.Aukcje;
+import pl.auk.jd.test.form.AukcjaDaneForm;
 import pl.auk.start.DBConnect;
 import pl.auk.start.SeFaStart;
 
@@ -110,7 +111,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		
 		
 		if (u.equals(start[1]))	{
-			new NewAukcjaCreateForm();
+			new AukcjaDaneForm();
 			this.dispose();
 		}
 		

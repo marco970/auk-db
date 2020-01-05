@@ -3,20 +3,14 @@ package pl.auk.jd.test.form;
 import java.util.regex.Pattern;
 
 public class StringFieldValidator implements FieldValidator {
-	
 
 
-	private FormFieldData testedValue;
-
-
-	public StringFieldValidator(FormFieldData testedValue) {
+	public StringFieldValidator() {
 		super();
-		this.testedValue = testedValue;
-
 	}
 	
 	@Override
-	public boolean validate() {
+	public boolean validate(FormFieldData testedValue) {
 		String testedString = testedValue.getTestedStr();
 		String patt = "\\s+";
 		Pattern pattern = Pattern.compile(patt);
@@ -26,17 +20,17 @@ public class StringFieldValidator implements FieldValidator {
 	}
 
 	@Override
-	public String getErrMessage() {
-		if (validate()) return "";
+	public String getErrMessage(FormFieldData testedValue) {
+		if (validate(testedValue)) return "";
 		else return "pole nie może byc puste";
 	}
 
 	public static void main(String[] args) {
 		
 		FormFieldData testedValue = new FormFieldData("", 0, "");
-		StringFieldValidator str = new StringFieldValidator(testedValue);
-		System.out.println(str.getErrMessage());
-		System.out.println(str.validate());
+		StringFieldValidator str = new StringFieldValidator();
+		System.out.println(str.getErrMessage(testedValue));
+		System.out.println(str.validate(testedValue));
 
 
 	}

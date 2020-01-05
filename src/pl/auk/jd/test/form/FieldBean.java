@@ -1,31 +1,35 @@
 package pl.auk.jd.test.form;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-public class FormBean {
+public class FieldBean {
 	
-	private String nazwa;
+	private JLabel nazwa;
 	
 	private JComponent component;
 	
 	private FieldValidator validator;
 	
+	private JLabel errMessage;
 	
-	public FormBean(String nazwa, JComponent component, FieldValidator validator) {
+	
+	public FieldBean(JLabel nazwa, JComponent component, FieldValidator validator, JLabel errMessage) {
 		super();
 		this.nazwa = nazwa;
 		this.component = component;
 		this.validator = validator;
+		this.errMessage = errMessage;
 	}
 
 
-	public String getNazwa() {
+	public JLabel getNazwa() {
 		return nazwa;
 	}
 
 
-	public void setNazwa(String nazwa) {
+	public void setNazwa(JLabel nazwa) {
 		this.nazwa = nazwa;
 	}
 
@@ -48,20 +52,24 @@ public class FormBean {
 	public void setValidator(FieldValidator validator) {
 		this.validator = validator;
 	}
-	
+
+
+	public JLabel getErrMessage() {
+		return errMessage;
+	}
+
+	public void setErrMessage(JLabel errMessage) {
+		this.errMessage = errMessage;
+	}
+
 
 	@Override
 	public String toString() {
-		return "FormBean [nazwa=" + nazwa + ", component=" + component.getName() + ", validator=" + validator.getClass() + "]";
+		return "FieldBean [nazwa=" + nazwa + ", component=" + component + ", validator=" + validator + ", errMessage="
+				+ errMessage + "]";
 	}
-
-
-	public static void main(String[] args) {
-		
-		FormFieldData testedValue = new FormFieldData("", 0, "");
-
-		FormBean fb = new FormBean("asd", new JTextArea(), new StringFieldValidator(testedValue) );
-		System.out.println(fb.toString());
-	}
+	
+	
+	
 
 }
