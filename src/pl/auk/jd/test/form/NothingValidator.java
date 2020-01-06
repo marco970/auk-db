@@ -12,7 +12,7 @@ public class NothingValidator implements FieldValidator {
 	}
 
 	@Override
-	public String getErrMessage(FormFieldData testedValue) {
+	public String printErrMessage(FormFieldData testedValue) {
 		return "";
 	}
 	public static void main(String[] args) {

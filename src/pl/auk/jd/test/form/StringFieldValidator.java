@@ -20,16 +20,19 @@ public class StringFieldValidator implements FieldValidator {
 	}
 
 	@Override
-	public String getErrMessage(FormFieldData testedValue) {
-		if (validate(testedValue)) return "";
-		else return "pole nie może byc puste";
+	public String printErrMessage(FormFieldData testedValue) {
+		String a = "";
+		if (validate(testedValue)) a =  "";
+		else a = "pole nie może byc puste";
+		System.out.println("z printErrMessage " + a);
+		return a;
 	}
 
 	public static void main(String[] args) {
 		
 		FormFieldData testedValue = new FormFieldData("", 0, "");
 		StringFieldValidator str = new StringFieldValidator();
-		System.out.println(str.getErrMessage(testedValue));
+		System.out.println(str.printErrMessage(testedValue));
 		System.out.println(str.validate(testedValue));
 
 

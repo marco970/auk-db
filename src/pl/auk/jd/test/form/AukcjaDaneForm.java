@@ -2,6 +2,7 @@ package pl.auk.jd.test.form;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -16,12 +17,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import pl.auk.java.beans.front2.RawForm;
+import net.miginfocom.swing.MigLayout;
+import pl.auk.back.AukcjaAdd;
+import pl.auk.entities.Aukcje;
+import pl.auk.java.beans.front2.AukcjomatView;
 
 
-public class AukcjaDaneForm extends RawForm implements FormUtils, FocusListener {
+public class AukcjaDaneForm extends RawForm implements FormUtils {
 	
 	private static String[] start = {"Start", "Exit"};
+	
+	private static String[] buttons = {"Anuluj", "Zapisz"};
+	
+	
 	
 	private JTextField tfNazwa;
 	private JTextArea taOpis;
@@ -38,7 +46,7 @@ public class AukcjaDaneForm extends RawForm implements FormUtils, FocusListener 
 	public AukcjaDaneForm() {
 		super("Dane aukcji - dodaj - edytuj", start);
 		
-		Font fontNazwa = new Font("Tahoma", Font.PLAIN, 9);
+		Font fontNazwa = new Font("Tahoma", Font.PLAIN, 11);
 		
 		this.tfNazwa = FormUtils.textFieldDef(20, this, fontNazwa);
 		
@@ -47,41 +55,129 @@ public class AukcjaDaneForm extends RawForm implements FormUtils, FocusListener 
 		
 		this.tfWaluta = FormUtils.textFieldDef(10, this, fontNazwa);
 
-		this.errMessageNazwa = FormUtils.labelDef("", Color.RED, SwingConstants.LEFT);
-		System.out.println(errMessageNazwa.toString());
-		
-		this.errMessageWaluta = FormUtils.labelDef("", Color.RED, SwingConstants.LEFT);
-		System.out.println(errMessageWaluta.toString());
-		
-		
+		this.errMessageNazwa = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.errMessageWaluta = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+	
 		this.validateString = new StringFieldValidator();
 		this.noValidation = new NothingValidator();
 		
-		fieldBeanCreate("nazwa aukcji", tfNazwa, validateString, errMessageNazwa);
-		fieldBeanCreate("opis", sp, noValidation, new JLabel(""));
+		fieldBeanCreate("nazwa", tfNazwa, validateString, errMessageNazwa);
 		fieldBeanCreate("waluta", tfWaluta, validateString, errMessageWaluta);
+		fieldBeanCreate("opis", sp, noValidation, new JLabel(""));
 
 		JPanel panelInherited = super.panelM;
 		panelInherited.add(new JLabel("Dane aukcji:"), "wrap");
 		
 		JPanel localPanel = FormUtils.createForm(super.listFieldBean);
 		panelInherited.add(localPanel, "wrap");
+		
+		List<JButton> buttonList = new ArrayList<>();
+		buttonList.add(new JButton("anuluj"));
+		buttonList.add(new JButton("dalej"));
+		
+		
+		saveBtn = new JButton("zapisz");
+		buttonList.add(saveBtn);
+		saveBtn.setEnabled(false);
+		
+		JPanel buttonPanel = FormUtils.createButtons(buttonList, this);
+
+		
+		
+		panelInherited.add(buttonPanel, "wrap");
+		
 
 	}
 
 	public static void main(String[] args) {
 		new AukcjaDaneForm();
 	}
-
+	
 	@Override
-	public void focusGained(FocusEvent e) {
+	public void actionPerformed(ActionEvent e) {
+		String u = e.getActionCommand();
+		if (u.equals("zapisz"))	{
+			Aukcje aukcja = new Aukcje(
+					tfNazwa.getText(), 
+					taOpis.getText(), 
+					"", 
+					"", 
+					tfWaluta.getText());
+			new AukcjaAdd(aukcja);
+			new AukcjomatView();
+		}
+		if (u.equals(start[start.length-1]))	{
+			this.dispose();
+			new AukcjomatView();
+		}
+		
+		if (u.equals("anuluj"))	{
+			this.dispose();
+			new AukcjomatView();
+		}
+		if (u.equals("anuluj"))	{
+			this.revalidate();
+			this.repaint();
+		}
 
 	}
+
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
+	
+		repaint();
+		revalidate();
+		
+		StringFieldValidator sv1 = new StringFieldValidator();
+
+		boolean resNazwa = sv1.validate(new FormFieldData(
+						tfNazwa.getText(), 
+						0, 
+						""));
+		
+		
+		String messageNazwa = sv1.printErrMessage(new FormFieldData(
+						tfNazwa.getText(), 
+						0, 
+						""));
+		
+		if (resNazwa)	errMessageNazwa.setText("");
+		else errMessageNazwa.setText(messageNazwa);
+		
+		StringFieldValidator sv2 = new StringFieldValidator();
+		//dopisać klasę do walidacji waluty - max 10 chars, bez spacji
+		
+		boolean resWaluta = sv2.validate(new FormFieldData(
+				tfWaluta.getText(),
+				0,
+				""));
+		//ten FormFieldData powinien mieć jedną wartość a nie taki głupi ciąg
+		//przeciążyć konstruktory
+		
+		String messageWaluta = sv2.printErrMessage(new FormFieldData(
+				tfWaluta.getText(),
+				0,
+				""));
+		
+		if (resWaluta) errMessageWaluta.setText("");
+		else errMessageWaluta.setText(messageWaluta);
+
+		saveBtn.setEnabled(resNazwa && resWaluta);
+		this.repaint();
+		
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

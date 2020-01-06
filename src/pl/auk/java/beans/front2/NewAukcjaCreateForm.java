@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.AukcjaAdd;
 import pl.auk.entities.Aukcje;
+import pl.auk.jd.test.form.RawForm;
 import pl.auk.start.SeFaStart;
 
 public class NewAukcjaCreateForm extends RawForm implements ActionListener, FocusListener		{
@@ -90,8 +91,8 @@ public class NewAukcjaCreateForm extends RawForm implements ActionListener, Focu
 		}
 		if (u.equals("zapisz"))	{
 			Aukcje aukcja = new Aukcje(tfNazwa.getText(), taOpis.getText(), "", "", tfWaluta.getText());
-			SessionFactory factory = SeFaStart.getFactory();
-			new AukcjaAdd(aukcja, factory);
+
+			new AukcjaAdd(aukcja);
 			new AukcjomatView();
 			
 		}

@@ -13,8 +13,9 @@ import pl.auk.start.SeFaStart;
 
 public class AukcjaAdd {
 	
-	public AukcjaAdd(Aukcje aukcja, SessionFactory factory)	{
+	public AukcjaAdd(Aukcje aukcja)	{
 		
+		SessionFactory factory = SeFaStart.getFactory();
 		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
 		
 		if (factory.equals(null))	{
@@ -39,7 +40,7 @@ public class AukcjaAdd {
 		SessionFactory factory = SeFaStart.getFactory();
 		
 		Aukcje aukcja = new Aukcje("ello-tender", "opis opis opis", "", "","EUR");
-		new AukcjaAdd(aukcja, factory);
+		new AukcjaAdd(aukcja);
 
 		factory.close();
 		

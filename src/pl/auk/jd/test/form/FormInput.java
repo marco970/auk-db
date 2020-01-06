@@ -7,8 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pl.auk.java.beans.front2.RawForm;
-
 public class FormInput extends RawForm {
 	
 	private String nazwa;

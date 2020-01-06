@@ -1,4 +1,4 @@
-package pl.auk.java.beans.front2;
+package pl.auk.jd.test.form;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,7 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,16 +20,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import pl.auk.jd.test.form.FieldBean;
-import pl.auk.jd.test.form.FieldValidator;
-import pl.auk.jd.test.form.FormUtils;
+import pl.auk.java.beans.front2.AukcjomatView;
 
 @SuppressWarnings("serial")
 public class RawForm extends JFrame implements ActionListener, FocusListener {
 	
 	protected JPanel panelM;
+	
 	private String[] start;
 	protected List<FieldBean> listFieldBean;
+	
+	protected List<JButton> buttonList;
 	
 	public RawForm(String title, String[] start)	{
 		super(title);
@@ -37,11 +39,11 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		this.listFieldBean = new ArrayList<>();
 		
 		
-		int width = 500;
-		int height=	300;	
+		int width = 600;
+		int height=	400;	
 		setSize(width, height);
 		
-		System.out.println("konstruktor b");
+//		System.out.println("konstruktor b");
 		
 		this.panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,6 +54,8 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		setJMenuBar(mb);
 		
 		menuBarMenuCreate(mb, start);
+		
+		this.buttonList = new ArrayList<>();
 		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,11 +74,18 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
-		System.out.println(start.length);
+		//System.out.println(start[start.length-1]+" -> "+u);
+		
 		if (u.equals(start[start.length-1]))	{
 			this.dispose();
+			new AukcjomatView();
 		}
 		
+		if (u.equals("anuluj"))	{
+			this.dispose();
+			new AukcjomatView();
+		}
+
 	}
 	@Override
 	public void focusGained(FocusEvent e) {
@@ -90,8 +101,10 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	public void  fieldBeanCreate(String name, JComponent field, FieldValidator validator, JLabel errMessage)	{
 		JLabel nazwa = FormUtils.labelDef(name, Color.BLACK, SwingConstants.RIGHT);
 		FieldBean  fieldBean = new FieldBean(nazwa, field, validator, errMessage);
-		System.out.println("z metody fieldBeanCreate: "+ fieldBean.getErrMessage());
+		//System.out.println("z metody fieldBeanCreate: "+ fieldBean.getErrMessage());
 		listFieldBean.add(fieldBean);		
 	}
+	
+	
 
 }
