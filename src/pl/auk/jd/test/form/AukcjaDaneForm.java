@@ -37,8 +37,8 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 	private JLabel errMessageNazwa;
 	private JLabel errMessageWaluta;
 	private JButton saveBtn;
-	private StringFieldValidator validateString;
-	private NothingValidator noValidation;
+	private JButton toBidders;
+
 	
 //	private List<FieldBean> listFieldBean;
 	
@@ -54,16 +54,14 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 		JScrollPane sp = new JScrollPane(taOpis);
 		
 		this.tfWaluta = FormUtils.textFieldDef(10, this, fontNazwa);
+		tfWaluta.setText("Euro");
 
 		this.errMessageNazwa = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
 		this.errMessageWaluta = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
-	
-		this.validateString = new StringFieldValidator();
-		this.noValidation = new NothingValidator();
-		
-		fieldBeanCreate("nazwa", tfNazwa, validateString, errMessageNazwa);
-		fieldBeanCreate("waluta", tfWaluta, validateString, errMessageWaluta);
-		fieldBeanCreate("opis", sp, noValidation, new JLabel(""));
+			
+		fieldBeanCreate("nazwa", tfNazwa, errMessageNazwa);
+		fieldBeanCreate("waluta", tfWaluta, errMessageWaluta);
+		fieldBeanCreate("opis", sp, new JLabel(""));
 
 		JPanel panelInherited = super.panelM;
 		panelInherited.add(new JLabel("Dane aukcji:"), "wrap");
@@ -79,6 +77,8 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 		saveBtn = new JButton("zapisz");
 		buttonList.add(saveBtn);
 		saveBtn.setEnabled(false);
+		
+		
 		
 		JPanel buttonPanel = FormUtils.createButtons(buttonList, this);
 
@@ -131,34 +131,18 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 		
 		StringFieldValidator sv1 = new StringFieldValidator();
 
-		boolean resNazwa = sv1.validate(new FormFieldData(
-						tfNazwa.getText(), 
-						0, 
-						""));
-		
-		
-		String messageNazwa = sv1.printErrMessage(new FormFieldData(
-						tfNazwa.getText(), 
-						0, 
-						""));
+		boolean resNazwa = sv1.validate(new FormFieldData(tfNazwa.getText())); 
+
+		String messageNazwa = sv1.printErrMessage(new FormFieldData(tfNazwa.getText()));
 		
 		if (resNazwa)	errMessageNazwa.setText("");
 		else errMessageNazwa.setText(messageNazwa);
 		
-		StringFieldValidator sv2 = new StringFieldValidator();
-		//dopisać klasę do walidacji waluty - max 10 chars, bez spacji
+		CurrencyFieldValidator sv2 = new CurrencyFieldValidator();
 		
-		boolean resWaluta = sv2.validate(new FormFieldData(
-				tfWaluta.getText(),
-				0,
-				""));
-		//ten FormFieldData powinien mieć jedną wartość a nie taki głupi ciąg
-		//przeciążyć konstruktory
+		boolean resWaluta = sv2.validate(new FormFieldData(tfWaluta.getText()));
 		
-		String messageWaluta = sv2.printErrMessage(new FormFieldData(
-				tfWaluta.getText(),
-				0,
-				""));
+		String messageWaluta = sv2.printErrMessage(new FormFieldData(tfWaluta.getText()));
 		
 		if (resWaluta) errMessageWaluta.setText("");
 		else errMessageWaluta.setText(messageWaluta);

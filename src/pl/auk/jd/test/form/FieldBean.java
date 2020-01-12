@@ -10,18 +10,18 @@ public class FieldBean {
 	
 	private JComponent component;
 	
-	private FieldValidator validator;
 	
 	private JLabel errMessage;
 	
 	
-	public FieldBean(JLabel nazwa, JComponent component, FieldValidator validator, JLabel errMessage) {
+	public FieldBean(JLabel nazwa, JComponent component, JLabel errMessage) {
 		super();
 		this.nazwa = nazwa;
 		this.component = component;
-		this.validator = validator;
 		this.errMessage = errMessage;
 	}
+	
+
 
 
 	public JLabel getNazwa() {
@@ -43,16 +43,6 @@ public class FieldBean {
 		this.component = component;
 	}
 
-	
-	public FieldValidator getValidator() {
-		return validator;
-	}
-
-	
-	public void setValidator(FieldValidator validator) {
-		this.validator = validator;
-	}
-
 
 	public JLabel getErrMessage() {
 		return errMessage;
@@ -65,8 +55,7 @@ public class FieldBean {
 
 	@Override
 	public String toString() {
-		return "FieldBean [nazwa=" + nazwa + ", component=" + component + ", validator=" + validator + ", errMessage="
-				+ errMessage + "]";
+		return "FieldBean [nazwa=" + nazwa + ", component=" + component + ", errMessage=" + errMessage + "]";
 	}
 	
 	

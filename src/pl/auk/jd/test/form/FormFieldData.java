@@ -6,13 +6,12 @@ public class FormFieldData {
 	
 	private int testedInt;
 	
-	private String testedEmail;
-
-	public FormFieldData(String testedStr, int testedInt, String testedEmail) {
-		super();
+	
+	public FormFieldData(String testedStr)	{
 		this.testedStr = testedStr;
+	}
+	public FormFieldData(int testedInt)	{
 		this.testedInt = testedInt;
-		this.testedEmail = testedEmail;
 	}
 
 	public String getTestedStr() {
@@ -30,17 +29,5 @@ public class FormFieldData {
 	public void setTestedInt(int testedInt) {
 		this.testedInt = testedInt;
 	}
-
-	public String getTestedEmail() {
-		return testedEmail;
-	}
-
-	public void setTestedEmail(String testedEmail) {
-		this.testedEmail = testedEmail;
-	}
-	
-	
-	
-	
 
 }

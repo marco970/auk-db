@@ -98,9 +98,9 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		
 	}
 	
-	public void  fieldBeanCreate(String name, JComponent field, FieldValidator validator, JLabel errMessage)	{
+	public void  fieldBeanCreate(String name, JComponent field, JLabel errMessage)	{
 		JLabel nazwa = FormUtils.labelDef(name, Color.BLACK, SwingConstants.RIGHT);
-		FieldBean  fieldBean = new FieldBean(nazwa, field, validator, errMessage);
+		FieldBean  fieldBean = new FieldBean(nazwa, field, errMessage);
 		//System.out.println("z metody fieldBeanCreate: "+ fieldBean.getErrMessage());
 		listFieldBean.add(fieldBean);		
 	}
