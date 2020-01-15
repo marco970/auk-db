@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.back.AukcjaAdd;
+import pl.auk.back.AukcjaUpdate;
 import pl.auk.entities.Aukcje;
 import pl.auk.java.beans.front2.AukcjomatView;
 
@@ -28,9 +29,7 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 	private static String[] start = {"Start", "Exit"};
 	
 	private static String[] buttons = {"Anuluj", "Zapisz"};
-	
-	
-	
+
 	private JTextField tfNazwa;
 	private JTextArea taOpis;
 	private JTextField tfWaluta;
@@ -38,26 +37,48 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 	private JLabel errMessageWaluta;
 	private JButton saveBtn;
 	private JButton toBidders;
-
+	private Aukcje aukcjaMod;
 	
-//	private List<FieldBean> listFieldBean;
+	private boolean nowa;
 	
+	private static Font fontNazwa = new Font("Tahoma", Font.PLAIN, 11);
 
 	public AukcjaDaneForm() {
-		super("Dane aukcji - dodaj - edytuj", start);
-		
-		Font fontNazwa = new Font("Tahoma", Font.PLAIN, 11);
+		super("Dane aukcji - dodaj", start);
 		
 		this.tfNazwa = FormUtils.textFieldDef(20, this, fontNazwa);
-		
 		this.taOpis = new JTextArea(5,20);
-		JScrollPane sp = new JScrollPane(taOpis);
-		
 		this.tfWaluta = FormUtils.textFieldDef(10, this, fontNazwa);
-		tfWaluta.setText("Euro");
-
 		this.errMessageNazwa = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
 		this.errMessageWaluta = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.nowa = true;
+		
+		konstruktorCommon();
+
+	}
+	
+	public AukcjaDaneForm(Aukcje aukcja) {
+		super("Dane aukcji - edytuj", start);
+		
+		this.tfNazwa = FormUtils.textFieldDef(20, this, fontNazwa);
+		this.taOpis = new JTextArea(5,20);
+		this.tfWaluta = FormUtils.textFieldDef(10, this, fontNazwa);
+		this.errMessageNazwa = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.errMessageWaluta = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.nowa = false;
+		this.aukcjaMod = aukcja;
+		
+		tfNazwa.setText(aukcja.getNazwaAuk());
+		taOpis.setText(aukcja.getOpisAuk());
+		tfWaluta.setToolTipText(aukcja.getWaluta());
+		
+		konstruktorCommon();
+
+	}
+
+	private void konstruktorCommon() {
+		JScrollPane sp = new JScrollPane(taOpis);
+		tfWaluta.setText("Euro");
 			
 		fieldBeanCreate("nazwa", tfNazwa, errMessageNazwa);
 		fieldBeanCreate("waluta", tfWaluta, errMessageWaluta);
@@ -72,27 +93,15 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 		List<JButton> buttonList = new ArrayList<>();
 		buttonList.add(new JButton("anuluj"));
 		buttonList.add(new JButton("dalej"));
-		
-		
+
 		saveBtn = new JButton("zapisz");
 		buttonList.add(saveBtn);
 		saveBtn.setEnabled(false);
-		
-		
-		
+
 		JPanel buttonPanel = FormUtils.createButtons(buttonList, this);
-
-		
-		
 		panelInherited.add(buttonPanel, "wrap");
-		
-
 	}
 
-	public static void main(String[] args) {
-		new AukcjaDaneForm();
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
@@ -103,9 +112,15 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 					"", 
 					"", 
 					tfWaluta.getText());
-			new AukcjaAdd(aukcja);
+			if (nowa) {
+				new AukcjaAdd(aukcja);
+			}else {
+				aukcja.setIdAukcja(aukcjaMod.getIdAukcja());
+				new AukcjaUpdate(aukcja);
+			}
 			new AukcjomatView();
 		}
+
 		if (u.equals(start[start.length-1]))	{
 			this.dispose();
 			new AukcjomatView();
@@ -121,7 +136,6 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 		}
 
 	}
-
 
 	@Override
 	public void focusLost(FocusEvent e) {
@@ -149,8 +163,7 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 
 		saveBtn.setEnabled(resNazwa && resWaluta);
 		this.repaint();
-		
-		
+
 	}
 
 	

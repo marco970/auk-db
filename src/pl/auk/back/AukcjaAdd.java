@@ -16,7 +16,7 @@ public class AukcjaAdd {
 	public AukcjaAdd(Aukcje aukcja)	{
 		
 		SessionFactory factory = SeFaStart.getFactory();
-		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
+//		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
 		
 		if (factory.equals(null))	{
 			System.out.println("Uwaga, nowe factory");

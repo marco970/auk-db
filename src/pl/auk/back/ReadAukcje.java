@@ -17,7 +17,9 @@ public class ReadAukcje {
 	private List<Bidders> bidders;
 	
 	@SuppressWarnings("unchecked")
-	public ReadAukcje(SessionFactory factory) {
+	public ReadAukcje() {
+		
+		SessionFactory factory = SeFaStart.getFactory();
 		
 		
 		if (factory==null)	{
@@ -45,8 +47,6 @@ public class ReadAukcje {
 			}
 		}
 
-	
-
 	private <T> void displayResults(List<T> aukcje) {
 		for(T el: aukcje)	{
 			System.out.println(el);
@@ -60,16 +60,5 @@ public class ReadAukcje {
 	public List<Bidders> getBidders() {
 		return bidders;
 	}
-	
-
-//	public static void main(String[] args) {
-//		
-//		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-//		PropertyConfigurator.configure(log4jConfPath);
-//		SessionFactory factory = new SeFaStart().getFactory();
-//		new ReadAukcje(factory);
-//		factory.close();
-//		
-//	}
 
 }

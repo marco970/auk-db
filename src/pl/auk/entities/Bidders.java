@@ -25,7 +25,7 @@ public class Bidders {
 	private String email;
 	
 	@Column(name="domiar")
-	private int domiar;
+	private double domiar;
 	
 //	@OneToMany(mappedBy="bidder",
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
@@ -68,11 +68,11 @@ public class Bidders {
 		this.email = email;
 	}
 
-	public int getDomiar() {
+	public double getDomiar() {
 		return domiar;
 	}
 
-	public void setDomiar(int domiar) {
+	public void setDomiar(double domiar) {
 		this.domiar = domiar;
 	}
 

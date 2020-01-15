@@ -37,13 +37,10 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		this.start = start;
 		
 		this.listFieldBean = new ArrayList<>();
-		
-		
+			
 		int width = 600;
 		int height=	400;	
 		setSize(width, height);
-		
-//		System.out.println("konstruktor b");
 		
 		this.panelM = new JPanel();
 		panelM.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,8 +53,7 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		menuBarMenuCreate(mb, start);
 		
 		this.buttonList = new ArrayList<>();
-		
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
@@ -74,7 +70,6 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
-		//System.out.println(start[start.length-1]+" -> "+u);
 		
 		if (u.equals(start[start.length-1]))	{
 			this.dispose();
@@ -89,8 +84,6 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	}
 	@Override
 	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void focusLost(FocusEvent e) {
@@ -101,7 +94,6 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	public void  fieldBeanCreate(String name, JComponent field, JLabel errMessage)	{
 		JLabel nazwa = FormUtils.labelDef(name, Color.BLACK, SwingConstants.RIGHT);
 		FieldBean  fieldBean = new FieldBean(nazwa, field, errMessage);
-		//System.out.println("z metody fieldBeanCreate: "+ fieldBean.getErrMessage());
 		listFieldBean.add(fieldBean);		
 	}
 	
