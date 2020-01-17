@@ -37,7 +37,7 @@ public class Bidders {
 		super();
 	}
 	
-	public Bidders(String name, String email, int domiar) {
+	public Bidders(String name, String email, double domiar) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -106,7 +106,8 @@ public class Bidders {
 
 	@Override
 	public String toString() {
-		return "Bidders [idBidder=" + idBidder + ", name=" + name + ", email=" + email + ", domiar=" + domiar + "]";
+		return "Bidders [idBidder=" + idBidder + ", aukcja=" + aukcja.getNazwaAuk() + ", name=" + name + ", email=" + email
+				+ ", domiar=" + domiar + "]";
 	}
 	
 }

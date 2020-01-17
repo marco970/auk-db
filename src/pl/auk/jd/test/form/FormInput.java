@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 
 public class FormInput extends RawForm {
 	
+//	do wywalenia?
+	
 	private String nazwa;
 	
 	private JComponent component;
@@ -23,15 +25,9 @@ public class FormInput extends RawForm {
 		super("formularz testowy", start);
 		this.nazwa = nazwa;
 		this.component = component;
-//		this.methValidacji = methValidacji;
-//		this.errMessages = errMessages;
 		
 		System.out.println("konstruktor a");
-		
-//		if (methValidacji.size()!=errMessages.size()) {
-//			System.out.println("******* Błędne dane walidacji");
-//		}
-		
+			
 		JPanel panelInherited = super.panelM;
 		
 		

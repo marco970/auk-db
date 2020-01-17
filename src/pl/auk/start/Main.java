@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 
 import antlr.DocBookCodeGenerator;
 import pl.auk.back.OfferEnti;
-import pl.auk.back.ReadAukcje;
+import pl.auk.back.AukcjeRead;
 import pl.auk.java.beans.front2.AukcjomatView;
 import pl.auk.java.beans.front2.ListBean;
 import pl.auk.java.beans.front2.MainWindowAukcja;
@@ -61,7 +61,7 @@ public class Main {
 		
 //		System.out.println("main lb "+lb.toString());
 
-		StepsView sv = new StepsView(lb);
+//		StepsView sv = new StepsView(lb);
 		
 //		lb.addPropertyChangeListener(sv);
 

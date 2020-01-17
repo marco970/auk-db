@@ -73,12 +73,12 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		
 		if (u.equals(start[start.length-1]))	{
 			this.dispose();
-			new AukcjomatView();
+//			new AukcjomatView();
 		}
 		
 		if (u.equals("anuluj"))	{
 			this.dispose();
-			new AukcjomatView();
+//			new AukcjomatView();
 		}
 
 	}

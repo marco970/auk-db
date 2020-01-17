@@ -10,14 +10,14 @@ import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
 import pl.auk.start.SeFaStart;
 
-public class ReadAukcje {
+public class AukcjeRead {
 	
 	private List<Aukcje> aukcje;
 	
 	private List<Bidders> bidders;
 	
 	@SuppressWarnings("unchecked")
-	public ReadAukcje() {
+	public AukcjeRead() {
 		
 		SessionFactory factory = SeFaStart.getFactory();
 		

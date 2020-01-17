@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +20,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import pl.auk.back.ReadAukcje;
+import pl.auk.back.AukcjeRead;
 import pl.auk.entities.Aukcje;
 import pl.auk.jd.test.form.AukcjaDaneForm;
 import pl.auk.jd.test.form.PopupMouseAdapter;
 import pl.auk.start.DBConnect;
 import pl.auk.start.SeFaStart;
 
-public class AukcjomatView extends JFrame implements ActionListener{
+public class AukcjomatView extends JFrame implements ActionListener, WindowListener {
 	
 	private String[] start = {"Start", "Nowa Aukcja", "Exit"};
 	private List<Aukcje> aukcje;
@@ -39,7 +41,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		super("Aukcje - panel główny");
 		//this.dbc = DBConnect.get;
 		
-		ReadAukcje ra = new ReadAukcje();
+		AukcjeRead ra = new AukcjeRead();
 		this.aukcje = ra.getAukcje();
 		this.iloscLinii = 6+aukcje.size();
 		
@@ -80,7 +82,7 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		
 		for (Aukcje el: aukcje)	{
 			JLabel label = new JLabel(el.getNazwaAuk());
-			label.addMouseListener(new PopupMouseAdapter(label, el.getIdAukcja(), this));
+			label.addMouseListener(new PopupMouseAdapter(label, el, this));
 			new JButton("edit");
 			panelAktywne.add(label, "width 150::200, wrap");
 		}
@@ -138,6 +140,46 @@ public class AukcjomatView extends JFrame implements ActionListener{
 		}
 
 		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		try {
+			DBConnect.getProcess().destroy();
+			System.out.println("---- process destroyed");
+		} catch (Exception e2) {
+		}
+		System.exit(0);
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+	
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+
 	}
 
 }

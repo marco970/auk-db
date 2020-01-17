@@ -7,11 +7,11 @@ import org.hibernate.SessionFactory;
 import pl.auk.entities.Aukcje;
 import pl.auk.start.SeFaStart;
 
-public class ReadSingleAukcja {
+public class AukcjaReadSingle {
 	
 	private Aukcje aukcja;
 	
-	public ReadSingleAukcja(int idAukcja)	{
+	public AukcjaReadSingle(int idAukcja)	{
 		SessionFactory factory = SeFaStart.getFactory();
 		System.out.println("Session Factory(ReadSingleAukcja) : " + factory.hashCode());
 		
@@ -43,7 +43,7 @@ public class ReadSingleAukcja {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new ReadSingleAukcja(27).getAukcja().getNazwaAuk());
+		System.out.println(new AukcjaReadSingle(27).getAukcja().getNazwaAuk());
 		
 	}
 	

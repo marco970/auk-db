@@ -29,7 +29,7 @@ public class Bids {
 
 	
 	@Column(name="cena")
-	private int cena;
+	private double cena;
 	
 	@Column(name="pozycja")
 	private int pozycja; 
@@ -68,11 +68,11 @@ public class Bids {
 		this.step = step;
 	}
 
-	public int getCena() {
+	public double getCena() {
 		return cena;
 	}
 
-	public void setCena(int cena) {
+	public void setCena(double cena) {
 		this.cena = cena;
 	}
 

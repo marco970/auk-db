@@ -10,13 +10,20 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import pl.auk.back.ReadSingleAukcja;
+import pl.auk.back.AukcjaReadSingle;
+import pl.auk.entities.Aukcje;
 import pl.auk.java.beans.front2.AukcjomatView;
+import pl.auk.jd.test.StandardWindow;
 
 public class PopupMouseAdapter extends MouseAdapter implements ActionListener {
 	
 	private JLabel label;
-	private int idAukcja;
+//	private int idAukcja;
+	
+	
+	private Aukcje aukcja;
+	
+	
 	private String[][] matrix = {
 			{"edycja danych aukcji", "editData"},
 			{"edycja dostawców", "editBidder"},
@@ -26,10 +33,11 @@ public class PopupMouseAdapter extends MouseAdapter implements ActionListener {
 	
 	private AukcjomatView aukcjomatView;
 
-	public PopupMouseAdapter(JLabel label, int idAukcja, AukcjomatView aukcjomatView ) {
+	public PopupMouseAdapter(JLabel label, Aukcje aukcja, AukcjomatView aukcjomatView ) {
 		super();
 		this.label = label;
-		this.idAukcja = idAukcja;
+		this.aukcja = aukcja;
+//		this.idAukcja = idAukcja;
 		this.aukcjomatView = aukcjomatView;
 //		System.out.println(matrix.length);
 	}
@@ -40,14 +48,16 @@ public class PopupMouseAdapter extends MouseAdapter implements ActionListener {
 		
 		if (e.getActionCommand().equals(matrix[0][1]))	{
 //			"edycja danych aukcji", "editData"
-			System.out.println(new ReadSingleAukcja(idAukcja).getAukcja().getNazwaAuk());
+			System.out.println(new AukcjaReadSingle(aukcja.getIdAukcja()).getAukcja().getNazwaAuk());
 			aukcjomatView.dispose();
 //			ReadSingleAukcja rsa = new ReadSingleAukcja(idAukcja);
-			new AukcjaDaneForm(new ReadSingleAukcja(idAukcja).getAukcja());
+			new AukcjaDaneForm(new AukcjaReadSingle(aukcja.getIdAukcja()).getAukcja());
 			 
 			
 		}
 		if (e.getActionCommand().equals(matrix[1][1]))	{
+			
+			new StandardWindow("Edycja uczestników aukcji", aukcja);
 			
 		}
 		if (e.getActionCommand().equals(matrix[2][1]))	{

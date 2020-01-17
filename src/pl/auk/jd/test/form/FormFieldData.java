@@ -6,6 +6,10 @@ public class FormFieldData {
 	
 	private int testedInt;
 	
+	private double testedDouble;
+	
+	
+	
 	
 	public FormFieldData(String testedStr)	{
 		this.testedStr = testedStr;

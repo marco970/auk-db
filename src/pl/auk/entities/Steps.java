@@ -25,13 +25,13 @@ public class Steps {
 	private int krokNr;
 	
 	@Column(name="min_change")
-	private int minPost;
+	private double minPost;
 
 
 	public Steps() {
 	}
 
-	public Steps(int krokNr, int minPost) {
+	public Steps(int krokNr, double minPost) {
 		super();
 		this.krokNr = krokNr;
 		this.minPost = minPost;
@@ -48,12 +48,12 @@ public class Steps {
 	}
 
 
-	public int getMinPost() {
+	public double getMinPost() {
 		return minPost;
 	}
 
 
-	public void setMinPost(int minPost) {
+	public void setMinPost(double minPost) {
 		this.minPost = minPost;
 	}
 

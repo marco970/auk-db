@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,10 +41,10 @@ public class Aukcje {
 	
 
 	
-//	@OneToMany(mappedBy="aukcja",
-//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-//						 CascadeType.DETACH, CascadeType.REFRESH})
-//	private List<Bidders> bidders;
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="aukcja",
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Bidders> bidders;
 	
 
 	
@@ -135,13 +136,13 @@ public class Aukcje {
 //	}
 //
 //
-//	public void add(Bidders bidder)	{
-//		if(bidders == null)	{
-//			bidders = new ArrayList<>();
-//		}
-//		bidders.add(bidder);
-//		bidder.setAukcja(this);
-//	}
+	public void add(Bidders bidder)	{
+		if(bidders == null)	{
+			bidders = new ArrayList<>();
+		}
+		bidders.add(bidder);
+		bidder.setAukcja(this);
+	}
 //	
 	
 

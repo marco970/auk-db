@@ -130,7 +130,7 @@ public class AukcjaDaneForm extends RawForm implements FormUtils {
 			this.dispose();
 			new AukcjomatView();
 		}
-		if (u.equals("anuluj"))	{
+		if (u.equals("dalej"))	{
 			this.revalidate();
 			this.repaint();
 		}
