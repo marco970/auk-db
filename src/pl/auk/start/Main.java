@@ -48,7 +48,7 @@ public class Main {
 		krok2.add(new OfferRaw(2, "EPO", 1100));
 		
 		List<List<OfferEnti>> aukcja = new ArrayList<>();
-		//tu trzeba przerobi� krok 0 i krok 1 na 
+
 //		aukcja.add(krok0);
 //		aukcja.add(krok1);
 		OfferCalc oc = new OfferCalc();
