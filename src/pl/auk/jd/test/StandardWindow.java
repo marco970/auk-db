@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -18,15 +19,22 @@ import javax.swing.table.TableModel;
 import net.miginfocom.swing.MigLayout;
 import pl.auk.entities.Aukcje;
 import pl.auk.java.beans.front2.AukcjomatView;
+import pl.auk.jd.test.form.FormMouseListener;
+import pl.auk.jd.test.form.FormUtils;
 import pl.auk.jd.test.form.bidderform.BidderFormTableModel;
 import pl.auk.jd.test.form.bidderform.BiddersForm;
 
-public class StandardWindow extends JFrame implements ActionListener {
+public class StandardWindow extends JFrame implements ActionListener, FormUtils {
 	
 	private String[] start = {"Start", "Dodaj Oferenta", "Exit"};
 	private Aukcje aukcja;
 	private JTable tableBidders;
 	private BidderFormTableModel modelBidders;
+	
+	private String[][] matrix = {
+			{"edycja danych dostawcy", "editBidderData"},
+			{"usuń dostawcę", "deleteBidder"},
+			}; 
 	
 	
 	
@@ -61,10 +69,18 @@ public class StandardWindow extends JFrame implements ActionListener {
 		
 		panelTable.add(sp, "wrap");
 		
+		FormMouseListener fml = new FormMouseListener(tableBidders);
+		
+		tableBidders.addMouseListener(fml);
 		
 		
+	    JPopupMenu popup = new JPopupMenu();
+	    
+		for (int i=0; i<matrix.length; i++)	{
+			FormUtils.addMenuItem(popup, matrix[i][0],matrix[i][1], this);
+		}
 		
-		
+		tableBidders.setComponentPopupMenu(popup);
 		
 		panelM.add(new JLabel("Tabelka powyżej"), "wrap");
 		
@@ -89,11 +105,27 @@ public class StandardWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
+		
+		int selectedRow = tableBidders.getSelectedRow();
+		int realSelectedRow = tableBidders.convertRowIndexToModel(selectedRow);
+		
 		if (u.equals(start[start.length-1]))	{
 			this.dispose();
 		}
 		if (u.equals(start[start.length-2]))	{
 			new BiddersForm(aukcja, modelBidders);
+		}
+		
+		if (e.getActionCommand().equals(matrix[0][1]))	{
+			
+			new BiddersForm(aukcja, modelBidders, modelBidders.getBidder(realSelectedRow));
+
+			
+			System.out.println("update " +selectedRow+" -- "+realSelectedRow);
+		}
+		
+		if (e.getActionCommand().equals(matrix[1][1]))	{
+			System.out.println("delete");
 		}
 		
 	}

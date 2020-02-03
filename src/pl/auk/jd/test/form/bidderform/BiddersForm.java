@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.TableModel;
 
 import pl.auk.back.BidderAdd;
+import pl.auk.back.BidderUpdate;
 import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
 import pl.auk.jd.test.form.CurrencyFieldValidator;
@@ -50,6 +51,8 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 	
 	private BidderFormTableModel modelBidders;
 	
+	private Bidders bidder;
+	
 
 	public BiddersForm(Aukcje aukcja, BidderFormTableModel modelBidders) {
 		super("Nowy Oferent", start);
@@ -68,11 +71,32 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 		this.modelBidders =modelBidders;
 		
 		konstruktorCommon();
-		
 	}
 	
-	public BiddersForm(Bidders bidder, Aukcje aukcja) {
+	public BiddersForm(Aukcje aukcja, BidderFormTableModel modelBidders, Bidders bidder) {
 		super("Edycja danych Oferenta", start);
+		
+		this.bidder = bidder;
+		
+		this.tfName = FormUtils.textFieldDef(20, this, fontNazwa);
+		this.tfEmail = FormUtils.textFieldDef(20, this, fontNazwa);
+		this.tfDomiar = FormUtils.textFieldDef(20, this, fontNazwa);
+		this.errMessageName = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.errMessageEmail = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		this.errMessageDomiar = FormUtils.labelDef(Color.RED, SwingConstants.LEFT);
+		
+		this.nowa = false;
+		
+		this.aukcja = aukcja;
+		
+		this.modelBidders =modelBidders;
+		
+		tfName.setText(bidder.getName());
+		tfEmail.setText(bidder.getEmail());
+		tfDomiar.setText(bidder.getDomiar()+"");
+		
+		
+		konstruktorCommon();	
 	}
 	
 	private void konstruktorCommon() {
@@ -94,8 +118,6 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 		saveBtn = new JButton("zapisz");
 		buttonList.add(saveBtn);
 		saveBtn.setEnabled(false);
-		
-//		saveBtn.setEnabled(true);
 
 		JPanel buttonPanel = FormUtils.createButtons(buttonList, this);
 		panelInherited.add(buttonPanel, "wrap");
@@ -105,13 +127,26 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
 		
-		if (u.equals("zapisz"))	{
+		if (u.equals("zapisz") && nowa)	{
 			
 			Bidders bidder= new Bidders(tfName.getText(), tfEmail.getText(), Double.parseDouble(tfDomiar.getText().replace(',', '.')));
 			new BidderAdd(aukcja, bidder);
 			modelBidders.recordAdd(bidder);
 			
 			dispose();
+		}
+		
+		if (u.equals("zapisz") && !nowa)	{
+			bidder.setName(tfName.getText());
+			bidder.setEmail( tfEmail.getText());
+			bidder.setDomiar(Double.parseDouble(tfDomiar.getText().replace(',', '.')));
+			new BidderUpdate(bidder);
+
+			
+			modelBidders.recordUpdate(bidder);
+			
+			dispose();
+			
 		}
 		
 		if (u.equals(start[start.length-1]))	{
@@ -154,9 +189,5 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

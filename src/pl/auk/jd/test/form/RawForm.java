@@ -50,23 +50,24 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 		JMenuBar mb = new JMenuBar();
 		setJMenuBar(mb);
 		
-		menuBarMenuCreate(mb, start);
+		FormUtils.menuBarMenuCreate(mb, start, this);
 		
 		this.buttonList = new ArrayList<>();
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-	public void menuBarMenuCreate(JMenuBar mb, String[] start) {
-		JMenu menu = new JMenu(start[0]);
-		for (int i = 1; i<start.length; i++)	{
-			JMenuItem mi = new JMenuItem(start[i]);
-			mi.addActionListener(this);
-			mi.setActionCommand(start[i]);
-			menu.add(mi);
-		}
-		mb.add(menu);
-	}
+//	public void menuBarMenuCreate(JMenuBar mb, String[] start) {
+//		JMenu menu = new JMenu(start[0]);
+//		for (int i = 1; i<start.length; i++)	{
+//			JMenuItem mi = new JMenuItem(start[i]);
+//			mi.addActionListener(this);
+//			mi.setActionCommand(start[i]);
+//			menu.add(mi);
+//		}
+//		mb.add(menu);
+//	}
+//	to chyba tu nie potrzebne? Chyba że zostawiam a w razie potrzeby modyfikuję dziedziczoną klasę
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
@@ -87,7 +88,7 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	}
 	@Override
 	public void focusLost(FocusEvent e) {
-		System.out.println("elo");
+//		System.out.println("elo");
 		
 	}
 	

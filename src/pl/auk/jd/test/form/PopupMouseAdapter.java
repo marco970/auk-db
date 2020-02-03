@@ -15,7 +15,7 @@ import pl.auk.entities.Aukcje;
 import pl.auk.java.beans.front2.AukcjomatView;
 import pl.auk.jd.test.StandardWindow;
 
-public class PopupMouseAdapter extends MouseAdapter implements ActionListener {
+public class PopupMouseAdapter extends MouseAdapter implements ActionListener, FormUtils {
 	
 	private JLabel label;
 //	private int idAukcja;
