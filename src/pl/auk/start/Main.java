@@ -24,6 +24,8 @@ interface DoKwadratu {
 public class Main {
 
 	public static void main(String[] args) {
+		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+		PropertyConfigurator.configure(log4jConfPath);
 		
 		DBConnect dbc = new DBConnect();
 		
@@ -61,14 +63,13 @@ public class Main {
 		
 //		System.out.println("main lb "+lb.toString());
 
-//		StepsView sv = new StepsView(lb);
+		StepsView sv = new StepsView(lb);
 		
 //		lb.addPropertyChangeListener(sv);
 
-//		MainWindowAukcja mw = new MainWindowAukcja(sv);
+		MainWindowAukcja mw = new MainWindowAukcja(sv);
 		
-		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-		PropertyConfigurator.configure(log4jConfPath);
+
 		SessionFactory factory = SeFaStart.getFactory();
 		System.out.println("Session Factory : " + factory.hashCode());
 		

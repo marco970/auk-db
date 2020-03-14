@@ -61,7 +61,7 @@ public class PopupMouseAdapter extends MouseAdapter implements ActionListener, F
 			
 		}
 		if (e.getActionCommand().equals(matrix[2][1]))	{
-			
+			System.out.println("startAukcji "+new AukcjaReadSingle(aukcja.getIdAukcja()).getAukcja().getNazwaAuk());
 		}
 		if (e.getActionCommand().equals(matrix[3][1]))	{
 			
