@@ -20,8 +20,7 @@ public class AukcjeRead {
 	public AukcjeRead() {
 		
 		SessionFactory factory = SeFaStart.getFactory();
-		
-		
+
 		if (factory==null)	{
 			System.out.println("Uwaga, nowe factory");
 			factory = SeFaStart.getFactory();
@@ -33,15 +32,15 @@ public class AukcjeRead {
 				this.aukcje = session
 						.createQuery("from Aukcje")
 						.getResultList();
-				String nrAukcji = 1+"";
-				this.bidders = session
-						.createQuery("from Bidders b where b.aukcja = '"+nrAukcji+"'")
-						.getResultList();
+//				String nrAukcji = 1+"";
+//				this.bidders = session
+//						.createQuery("from Bidders b where b.aukcja = '"+nrAukcji+"'")
+//						.getResultList();
 
 				session.getTransaction().commit();	
 
-				displayResults(aukcje);
-				displayResults(bidders);
+//				displayResults(aukcje);
+//				displayResults(bidders);
 			} catch (HibernateException e) {
 				e.printStackTrace();
 			}

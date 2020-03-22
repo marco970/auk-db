@@ -30,7 +30,7 @@ public class BiddersRead {
 
 			session.getTransaction().commit();	
 
-			displayResults(bidders);
+//			displayResults(bidders);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

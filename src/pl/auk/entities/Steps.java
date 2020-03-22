@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CollectionId;
+
 @Entity
 @Table(name="steps")
 public class Steps {
@@ -13,9 +15,15 @@ public class Steps {
 	@Column(name="id_step")
 	private int idStep;
 	
-	@OneToMany(mappedBy="step",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
+	
+	
+	@OneToMany(fetch=FetchType.EAGER,
+				mappedBy="step",
+				cascade= {
+						CascadeType.PERSIST, 
+						CascadeType.MERGE,
+						CascadeType.DETACH, 
+						CascadeType.REFRESH})
 	private List<Bids> bids;
 	
 //	@Column(name="id-aukcja")
@@ -26,15 +34,29 @@ public class Steps {
 	
 	@Column(name="min_change")
 	private double minPost;
+	
+	@Column(name="id_aukcja") 
+	private int idAukcja;
 
 
 	public Steps() {
 	}
 
-	public Steps(int krokNr, double minPost) {
+	public int getIdAukcja() {
+		return idAukcja;
+	}
+
+
+
+	public void setIdAukcja(int idAukcja) {
+		this.idAukcja = idAukcja;
+	}
+
+	public Steps(int krokNr, double minPost, int idAukcja) {
 		super();
 		this.krokNr = krokNr;
 		this.minPost = minPost;
+		this.idAukcja = idAukcja;
 	}
 
 
@@ -71,12 +93,14 @@ public class Steps {
 		
 		bid.setStep(this);
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Steps [idStep=" + idStep + ", krokNr=" + krokNr + ", minPost=" + minPost + "]";
+		return "Steps [idStep=" + idStep + ", bids=" + bids + ", krokNr=" + krokNr + ", minPost=" + minPost
+				+ ", idAukcja=" + idAukcja + "]";
 	}
-	
+
+
 
 
 	

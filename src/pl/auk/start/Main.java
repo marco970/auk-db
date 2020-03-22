@@ -67,7 +67,7 @@ public class Main {
 		
 //		lb.addPropertyChangeListener(sv);
 
-		MainWindowAukcja mw = new MainWindowAukcja(sv);
+//		MainWindowAukcja mw = new MainWindowAukcja(sv);
 		
 
 		SessionFactory factory = SeFaStart.getFactory();

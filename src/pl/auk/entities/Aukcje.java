@@ -39,16 +39,11 @@ public class Aukcje {
 	@Column(name="waluta")
 	private String waluta;
 	
-
-	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="aukcja",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Bidders> bidders;
 	
-
-	
-
 
 	public Aukcje()	{
 	}
@@ -62,7 +57,6 @@ public class Aukcje {
 		this.waluta = waluta;
 		
 	}
-
 
 	public int getIdAukcja() {
 		return idAukcja;
@@ -144,6 +138,9 @@ public class Aukcje {
 		bidder.setAukcja(this);
 	}
 //	
+
+	
+	
 	
 
 	@Override

@@ -26,6 +26,8 @@ public class SeFaStart {
 			 configuration.configure("hibernate.cfg.xml");
 			 configuration.addAnnotatedClass(Aukcje.class);
 			 configuration.addAnnotatedClass(Bidders.class);
+			 configuration.addAnnotatedClass(Steps.class);
+			 configuration.addAnnotatedClass(Bids.class);
 			 factory =  configuration.buildSessionFactory();
 			 System.out.println("Session Factory(SeFa) : " + factory.hashCode());
 		 }

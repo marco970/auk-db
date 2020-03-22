@@ -11,22 +11,21 @@ public class Bids {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id-bid")	
+	@Column(name="id_bid")	
 	private int idBid;
 	
 //	@Column(name="id-bidder")
 //	private int idBidder;
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-bidder")
+	@JoinColumn(name="id_bidder")
 	private Bidders bidder;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="id-step")
+	@JoinColumn(name="id_step")
 	private Steps step;
 	
-
 	
 	@Column(name="cena")
 	private double cena;
@@ -83,6 +82,8 @@ public class Bids {
 	public void setPozycja(int pozycja) {
 		this.pozycja = pozycja;
 	}
+	
+
 
 	@Override
 	public String toString() {
