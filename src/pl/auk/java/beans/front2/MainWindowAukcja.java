@@ -24,11 +24,15 @@ public class MainWindowAukcja extends JFrame implements ActionListener {
 	
 	private StepsView sv;
 	
+	private static String name;
+	
 	public MainWindowAukcja(StepsView sv) 	{
 		
-		super("Aukcja - okno aukcji");
+		super();
 		setDynamicView(sv);
 		sv.setMainWindowInstance(this);
+		this.name = this.getClass().getSimpleName();
+		this.setTitle("Aukcja - okno aukcji"+" "+name);
 		
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -66,7 +70,7 @@ public class MainWindowAukcja extends JFrame implements ActionListener {
 		JScrollPane scroll = new JScrollPane(sv);
 		panelM.add(scroll);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scroll);
+//		add(scroll);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -77,6 +81,7 @@ public class MainWindowAukcja extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//czy to jest potrzebny interfejs?
 		
 	}
 

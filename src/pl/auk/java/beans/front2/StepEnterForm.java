@@ -30,7 +30,7 @@ public class StepEnterForm extends JFrame implements ActionListener {
 	
 	private static Set<Integer> stepSet = new HashSet<>();
 	
-	private int minPost;
+	private double minPost;
 	
 	private HashMap<String, Integer> mapOffer;
 	
@@ -46,9 +46,12 @@ public class StepEnterForm extends JFrame implements ActionListener {
 	
 	private JButton anuluj;
 	
+	private static String name;
 	
-	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
-		super("wprowadzanie ofert dla kroku "+(stepNr));
+	
+	private StepEnterForm(int stepNr, List<OfferEnti> lastStep, double minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
+		
+		super();
 		stepSet.add(stepNr);
 		this.stepNr = stepNr;
 		this.minPost = minPost;
@@ -66,6 +69,9 @@ public class StepEnterForm extends JFrame implements ActionListener {
 		
 		this.zapisz = new JButton("Zapisz");
 		this.anuluj = new JButton("Anuluj");
+		
+		this.name = this.getClass().getSimpleName();
+		this.setTitle("wprowadzanie ofert dla kroku "+(stepNr)+" "+name);
 		
 		zapisz.addActionListener(this);
 		anuluj.addActionListener(this);
@@ -114,11 +120,11 @@ public class StepEnterForm extends JFrame implements ActionListener {
 		
 	}
 	
-	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, int minPost, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
+	public static synchronized StepEnterForm getInstance(int stepNr, List<OfferEnti> lastStep, double minPost2, List<List<OfferEnti>> stepList, ListBean lb, StepsView stepsView)	{
 		if (stepSet.contains(stepNr))	{
 			return null;
 		}
-		return new StepEnterForm(stepNr, lastStep, minPost, stepList, lb, stepsView);
+		return new StepEnterForm(stepNr, lastStep, minPost2, stepList, lb, stepsView);
 	}
 
 	@Override
@@ -127,12 +133,18 @@ public class StepEnterForm extends JFrame implements ActionListener {
 			List<OfferEnti> nextStep = new ArrayList<>();
 			List<OfferRaw> nextStepRaw = new ArrayList<>();
 			boolean err = false;
-			System.out.println("SEF error 1 "+err+"--> "+lb.toString());
+			System.out.println("SEF error 1 "+err+"--> "+lb.getClass().getSimpleName());
 			for(String el: mapJtf.keySet())	{
 				String newOffer=  mapJtf.get(el).getText();
 //				System.out.println("aaa- > "+el+" "+newOffer);
 				int value = Integer.valueOf(newOffer);
-				if (value <= mapOffer.get(el))	{		//value <= mapOffer.get(el)
+//				wygląda na to, że nie ma postąpienia minimalnego!!! 
+//				trzeba będzie je dodać
+				/**
+				 * nowy formularz, gdzie?
+				 * 
+				 */
+				if (value <= mapOffer.get(el))	{		
 					OfferRaw or = new OfferRaw(stepNr, el, value);
 					
 //					OfferEnti oe = oc.getOfferEntiList(oc);
@@ -141,7 +153,7 @@ public class StepEnterForm extends JFrame implements ActionListener {
 					
 					nextStepRaw.add(or);
 //					nextStep.add(oe);
-					System.out.println("SEF error 2 "+err+"--> "+lb.toString()+" "+or.getCena());
+					System.out.println("SEF error 2 "+err+"--> "+lb.getClass().getSimpleName()+" "+or.getCena());
 					mapMessage.get(el).setText("");
 				}
 				else	{
@@ -156,12 +168,17 @@ public class StepEnterForm extends JFrame implements ActionListener {
 				nextStep = oc.getOfferEntiList(nextStepRaw);
 				stepList.add(nextStep);
 
-				System.out.println("SEF error 3 "+err+"--> "+lb.toString()+stepList.size());
+				System.out.println("SEF error 3 "+err+"--> "+lb.getClass().getSimpleName()+" "+stepList.size());
 				
 				lb.setListBean(stepList);
 				
+//				tu zapiszemy krok w bazie danych
+				
 				stepsView.setDynamicContent(stepList);
 				stepsView.getMainWindowInstance().setDynamicView(stepsView);
+				
+
+				
 				
 				this.dispose();
 				if (stepSet.contains(stepNr)) stepSet.remove(stepNr);

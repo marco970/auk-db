@@ -23,7 +23,7 @@ public class StepsView extends JPanel implements ActionListener {
 	private int stepNr;
 	private ListBean lb;
 	
-	private int minPost;
+	private double minPost;
 	
 	private MainWindowAukcja mw = null;
 	
@@ -33,7 +33,10 @@ public class StepsView extends JPanel implements ActionListener {
 		drawPanel(stepList);
 		this.lastStep = stepList.get(stepList.size()-1);
 		this.stepNr = stepList.size()-1;
-		this.minPost = 100;		//potem odczytamy to z formularza jakiego�
+		/*
+		 * To trzeba dorobić jakimś formularzem, z Walidacją 
+		 */
+		this.minPost = -100;		//potem odczytamy to z formularza jakiegoś
 		this.lb = lb;
 
 	}
@@ -44,6 +47,12 @@ public class StepsView extends JPanel implements ActionListener {
 		this.setStepList(newStepList);
 		this.setStepNr(stepList.size()-1);
 		this.lastStep = stepList.get(stepList.size()-1);
+	}
+	public void setDynamicContend(List<List<OfferEnti>> newStepList, double minPost)	{
+		setMinPost(minPost);
+		this.removeAll();
+		this.drawPanel(newStepList);
+		this.setStepList(newStepList);
 	}
 	
 	public void setMainWindowInstance(MainWindowAukcja mw)	{
@@ -56,6 +65,16 @@ public class StepsView extends JPanel implements ActionListener {
 
 	public void setStepNr(int stepNr) {
 		this.stepNr = stepNr;
+	}
+	
+	
+
+	public double getMinPost() {
+		return minPost;
+	}
+
+	public void setMinPost(double minPost) {
+		this.minPost = minPost;
 	}
 
 	public MainWindowAukcja getMainWindowInstance() {
@@ -78,14 +97,18 @@ public class StepsView extends JPanel implements ActionListener {
 
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new MigLayout("wrap 1"));
+		
+		
 
 		JButton maile = new JButton("Utwórz maile");
 		JButton krok = new JButton("Kolejny krok");
 		JButton popraw = new JButton("Popraw Oferty");
+		JButton minPostButton = new JButton("Zmiana min. oferty");
 		
 		maile.addActionListener(this);
 		krok.addActionListener(this);
 		popraw.addActionListener(this);
+		minPostButton.addActionListener(this);
 		
 		popraw.setPreferredSize(new Dimension(120, 10));
 		maile.setPreferredSize(new Dimension(120, 10));
@@ -94,7 +117,7 @@ public class StepsView extends JPanel implements ActionListener {
 		buttons.add(maile);
 		buttons.add(krok);
 		buttons.add(popraw);
-		
+		buttons.add(minPostButton);
 
 		
 		for (int i = stepNr; i>0; i--)	{	
@@ -137,7 +160,7 @@ public class StepsView extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getActionCommand().equals("Utwórz maile"))	{
-			System.out.println("Utwórz maile");
+			System.out.println("komenda: Utwórz maile");
 			for (OfferEnti el: lastStep)	{
 				String address = el.getOferent()+"@"+el.getOferent()+".com";
 				try {
@@ -148,7 +171,6 @@ public class StepsView extends JPanel implements ActionListener {
 							el.getPosition(),
 							100);
 				} catch (URISyntaxException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
@@ -158,8 +180,17 @@ public class StepsView extends JPanel implements ActionListener {
 		
 		
 		if (e.getActionCommand().equals("Kolejny krok"))	{
-			System.out.println("Kolejny krok");
+			System.out.println("komenda: Kolejny krok");
 			StepEnterForm.getInstance(stepNr+1, lastStep, minPost, stepList, lb, this);
+		}
+		
+		if (e.getActionCommand().equals("Zmiana min. oferty"))	{
+			System.out.println("komenda: Zmiana min. oferty");
+			/**
+			 * tu dodać nowy formularz zmieniający minimalne postąpienie
+			 */
+//			setMinPost(300);
+//			setDynamicContend(stepList, minPost);
 		}
 
 	}

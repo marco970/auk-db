@@ -8,18 +8,12 @@ import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
 import pl.auk.start.SeFaStart;
 
-public class BidderAdd {
+public class BidderAdd extends FactoryBase{
 	
 	
 	public BidderAdd(Aukcje aukcja, Bidders bidder)		{
 		
-		SessionFactory factory = SeFaStart.getFactory();
-		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
-		
-		if (factory.equals(null))	{
-			System.out.println("Uwaga, nowe factory");
-			factory = SeFaStart.getFactory();
-		}
+		super();
 		try {
 			Session session = factory.getCurrentSession();
 			session.beginTransaction();
@@ -31,6 +25,9 @@ public class BidderAdd {
 		}	
 
 	}
+
+
+
 	
 
 	public static void main(String[] args) {

@@ -14,7 +14,7 @@ import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
 import pl.auk.entities.Steps;
 
-public class AukcjaIntegrate {
+public class AukcjaIntegrate  {
 	
 	/**
 	 * działanie klasy:
@@ -23,7 +23,8 @@ public class AukcjaIntegrate {
 	 * - StepsView sv = new StepsView(lb);
 	 * - ListBean lb = new ListBean(aukcja);
 	 * - List<List<OfferEnti>> aukcja = new ArrayList<>();
-	 * 
+	 * - aukcję robimy tak, że do Listy dodajemy 
+	 * 	- List<OfferEnti> (krokNr) 
 	 * 
 	 * 
 	 */
@@ -56,15 +57,61 @@ public class AukcjaIntegrate {
 		if (kroki.isEmpty())	{
 			
 			System.out.println("Aukcja "+ aukcja.getNazwaAuk() + " jeszcze się nie rozpoczęła");
+//			tu uruchamiamy StepEnterForm
+//			trzeba w kodzie utworzyć pierwszy krok
+//			trzeba potworzyć w ten sam sposób obiekty, które są potrzebne do uruchomienia tego formularza
+//			
+//			
 		}
 		else	{
 			maxKrokNr = Collections.max(kroki);
 			new StepsRead (aukcja.getIdAukcja());
 			new StepSingleRead(aukcja.getIdAukcja(), maxKrokNr);
+//			tu odpalamy widok auckcji - MainWindowAukcja
+//			reszta j.w.
 		}
 		System.out.println("ostatni krok ma numer: "+ maxKrokNr);
 		
+		List<OfferRaw> krok0 = new ArrayList<>();
+		krok0.add(new OfferRaw(1000, "Nokia", 0));
+		krok0.add(new OfferRaw(1000, "Huawei", 0));
+		krok0.add(new OfferRaw(1000, "Computaris", 0));
+		krok0.add(new OfferRaw(1000, "EPO", 0));
+
+//		List<OfferRaw> krok1 = new ArrayList<>();
+//		krok1.add(new OfferRaw(1, "Nokia", 900));
+//		krok1.add(new OfferRaw(1, "Huawei", 800));
+//		krok1.add(new OfferRaw(1, "Computaris", 800));
+//		krok1.add(new OfferRaw(1, "EPO", 1100));
+//		
+//		List<OfferRaw> krok2 = new ArrayList<>();
+//		krok2.add(new OfferRaw(2, "Nokia", 900));
+//		krok2.add(new OfferRaw(2, "Huawei", 600));
+//		krok2.add(new OfferRaw(2, "Computaris", 900));
+//		krok2.add(new OfferRaw(2, "EPO", 1100));
 		
+		List<List<OfferEnti>> aukcjaLoc = new ArrayList<>();
+
+//		aukcja.add(krok0);
+//		aukcja.add(krok1);
+//		aukcja.add(krok1);
+		
+		OfferCalc oc = new OfferCalc();
+		
+		aukcjaLoc.add(oc.getOfferEntiList(krok0));
+//		aukcjaLoc.add(oc.getOfferEntiList(krok1));
+//		aukcjaLoc.add(oc.getOfferEntiList(krok2));
+		
+		ListBean lb = new ListBean(aukcjaLoc);
+		
+//		System.out.println("main lb "+lb.toString());
+
+		StepsView sv = new StepsView(lb);
+		
+//		lb.addPropertyChangeListener(sv);
+		
+
+		MainWindowAukcja mw = new MainWindowAukcja(sv);
 		
 
 		

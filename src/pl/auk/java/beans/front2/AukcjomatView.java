@@ -37,13 +37,17 @@ public class AukcjomatView extends JFrame implements ActionListener, WindowListe
 	
 	private int iloscLinii;
 	
+	private static String name;
+	
 	public AukcjomatView()	{
-		super("Aukcje - panel główny");
+		super();
 		//this.dbc = DBConnect.get;
 		
 		AukcjeRead ra = new AukcjeRead();
 		this.aukcje = ra.getAukcje();
 		this.iloscLinii = 6+aukcje.size();
+		this.name = this.getClass().getSimpleName();
+		this.setTitle("Aukcje - panel główny "+name);
 		
 //		editBtn = new ArrayList<>();
 //		startBtn = new ArrayList<>();

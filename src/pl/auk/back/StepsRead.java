@@ -11,7 +11,7 @@ import pl.auk.entities.Steps;
 import pl.auk.start.DBConnect;
 import pl.auk.start.SeFaStart;
 
-public class StepsRead {
+public class StepsRead extends FactoryBase {
 	
 	
 	private List<Steps> steps;
@@ -19,14 +19,11 @@ public class StepsRead {
 	
 	public StepsRead (int idAukcji)		{
 		
+		super();
+		
 		this.name = this.getClass().getSimpleName();
 		
-		SessionFactory factory = SeFaStart.getFactory();
 
-		if (factory==null)	{
-			System.out.println("Uwaga, nowe factory");
-			factory = SeFaStart.getFactory();
-		}
 		
 		try {
 			Session session = factory.getCurrentSession();
@@ -43,15 +40,11 @@ public class StepsRead {
 			e.printStackTrace();
 		}
 		
-		System.out.println("**********START-> "+name);
+//		System.out.println("**********START-> "+name);
 		
 	}
 	
-	private <T> void displayResults(List<T> wynik) {
-		for(T el: wynik)	{
-			System.out.println(el);
-		}
-	}
+
 	
 	public List<Steps> getSteps()	{
 		return steps;

@@ -8,21 +8,16 @@ import pl.auk.entities.Bids;
 import pl.auk.entities.Steps;
 import pl.auk.start.SeFaStart;
 
-public class BidAdd {
+public class BidAdd extends FactoryBase {
 	
 	
 	
 	
 	public BidAdd(Steps step, Bids bid)	{
 		
+		super();
 		
-		SessionFactory factory = SeFaStart.getFactory();
-		System.out.println("Session Factory(AuckAdd) : " + factory.hashCode());
-		
-		if (factory.equals(null))	{
-			System.out.println("Uwaga, nowe factory");
-			factory = SeFaStart.getFactory();
-		}
+
 		try {
 			Session session = factory.getCurrentSession();
 			session.beginTransaction();
