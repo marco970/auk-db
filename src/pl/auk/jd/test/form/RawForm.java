@@ -88,7 +88,7 @@ public class RawForm extends JFrame implements ActionListener, FocusListener {
 	}
 	@Override
 	public void focusLost(FocusEvent e) {
-//		System.out.println("elo");
+		System.out.println("elo");
 		
 	}
 	

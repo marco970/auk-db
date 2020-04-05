@@ -53,6 +53,9 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 	
 	private Bidders bidder;
 	
+	/**
+	 * To ma byś singleton
+	 */
 
 	public BiddersForm(Aukcje aukcja, BidderFormTableModel modelBidders) {
 		super("Nowy Oferent", start);
