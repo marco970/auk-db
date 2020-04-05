@@ -191,6 +191,8 @@ public class StepsView extends JPanel implements ActionListener {
 			 */
 //			setMinPost(300);
 //			setDynamicContend(stepList, minPost);
+			
+			MinPostEnterForm.getInstanceMinPostForm(100, stepNr);
 		}
 
 	}

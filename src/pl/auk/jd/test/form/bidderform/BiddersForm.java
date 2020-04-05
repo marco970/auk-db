@@ -20,13 +20,13 @@ import pl.auk.back.BidderAdd;
 import pl.auk.back.BidderUpdate;
 import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
-import pl.auk.jd.test.form.CurrencyFieldValidator;
-import pl.auk.jd.test.form.DoubleValidator;
-import pl.auk.jd.test.form.EmailFieldValidator;
 import pl.auk.jd.test.form.FormFieldData;
 import pl.auk.jd.test.form.FormUtils;
 import pl.auk.jd.test.form.RawForm;
-import pl.auk.jd.test.form.StringFieldValidator;
+import pl.auk.validators.CurrencyFieldValidator;
+import pl.auk.validators.DoubleValidator;
+import pl.auk.validators.EmailFieldValidator;
+import pl.auk.validators.StringFieldValidator;
 
 public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 
@@ -194,3 +194,4 @@ public class BiddersForm extends RawForm implements FormUtils, ActionListener {
 
 
 }
+ 

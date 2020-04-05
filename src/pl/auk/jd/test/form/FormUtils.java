@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import pl.auk.validators.FieldBean;
 
 public interface FormUtils  {
 	

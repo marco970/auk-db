@@ -1,6 +1,8 @@
-package pl.auk.jd.test.form;
+package pl.auk.validators;
 
 import java.util.regex.Pattern;
+
+import pl.auk.jd.test.form.FormFieldData;
 
 public class DoubleValidator implements FieldValidator {
 	
@@ -25,7 +27,7 @@ public class DoubleValidator implements FieldValidator {
 			if (validate(testedValue))
 				return "";
 			else
-				return "nieprawidłowa wartość domiaru";
+				return "nieprawidłowa wartość";
 		}else return "pole nie może być puste";
 	}
 	

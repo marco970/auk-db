@@ -22,6 +22,8 @@ import pl.auk.back.AukcjaAdd;
 import pl.auk.back.AukcjaUpdate;
 import pl.auk.entities.Aukcje;
 import pl.auk.java.beans.front2.AukcjomatView;
+import pl.auk.validators.CurrencyFieldValidator;
+import pl.auk.validators.StringFieldValidator;
 
 
 public class AukcjaDaneForm extends RawForm implements FormUtils {

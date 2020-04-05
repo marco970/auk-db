@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import pl.auk.java.beans.front2.AukcjomatView;
+import pl.auk.validators.FieldBean;
 
 @SuppressWarnings("serial")
 public class RawForm extends JFrame implements ActionListener, FocusListener {

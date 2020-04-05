@@ -1,4 +1,6 @@
-package pl.auk.jd.test.form;
+package pl.auk.validators;
+
+import pl.auk.jd.test.form.FormFieldData;
 
 public class NothingValidator implements FieldValidator {
 

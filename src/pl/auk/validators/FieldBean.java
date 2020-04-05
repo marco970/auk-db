@@ -1,4 +1,4 @@
-package pl.auk.jd.test.form;
+package pl.auk.validators;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;

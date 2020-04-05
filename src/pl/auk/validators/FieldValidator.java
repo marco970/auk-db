@@ -1,6 +1,8 @@
-package pl.auk.jd.test.form;
+package pl.auk.validators;
 
 import java.util.regex.Pattern;
+
+import pl.auk.jd.test.form.FormFieldData;
 
 public interface FieldValidator {
 

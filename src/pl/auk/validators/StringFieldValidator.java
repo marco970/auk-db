@@ -1,18 +1,22 @@
-package pl.auk.jd.test.form;
+package pl.auk.validators;
 
 import java.util.regex.Pattern;
 
-public class CurrencyFieldValidator implements FieldValidator {
-	
-	public CurrencyFieldValidator()	{
+import pl.auk.jd.test.form.FormFieldData;
+
+public class StringFieldValidator implements FieldValidator {
+
+
+	public StringFieldValidator() {
 		super();
 	}
+	
 	@Override
 	public boolean validate(FormFieldData testedValue) {
 		String testedString = testedValue.getTestedStr();
-		String patt = "[^\\s]{1,9}";
+		String patt = "\\s+";
 		Pattern pattern = Pattern.compile(patt);
-		if((pattern.matcher(testedString).matches()))	{
+		if(!(pattern.matcher(testedString).matches() || "".equals(testedString)))	{
 			return true;
 		}else return false;
 	}
@@ -20,17 +24,19 @@ public class CurrencyFieldValidator implements FieldValidator {
 	@Override
 	public String printErrMessage(FormFieldData testedValue) {
 		if (validate(testedValue)) return "";
-		else return "nazwa waluty powinna być pojedyńczym słowem do 10 znaków";
+		else return "pole nie może byc puste";
 	}
-	
+
 	public static void main(String[] args) {
 		
-		FormFieldData testedValue = new FormFieldData("adsfff");
-		CurrencyFieldValidator str = new CurrencyFieldValidator();
+		FormFieldData testedValue = new FormFieldData(0);
+		StringFieldValidator str = new StringFieldValidator();
 		System.out.println(str.printErrMessage(testedValue));
 		System.out.println(str.validate(testedValue));
 
 
 	}
-
 }
+
+
+
