@@ -1,4 +1,4 @@
-package pl.auk.jd.test.form.bidderform;
+ package pl.auk.jd.test.form.bidderform;
 
 import java.awt.Color;
 import java.awt.Font;

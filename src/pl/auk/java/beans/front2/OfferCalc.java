@@ -3,17 +3,21 @@ package pl.auk.java.beans.front2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import pl.auk.back.OfferEnti;
+
+/**
+ * 
+ * @author marci
+ * Klasa ma za zadanie uszeregowanie ofert
+ *
+ */
 
 public class OfferCalc {
 
 	public OfferCalc()	{		
 	}
 	
-	public List<OfferEnti> getOfferEntiList(List<OfferRaw> step)	{
+	public static List<OfferEnti> getOfferEntiList(List<OfferRaw> step)	{
 
 		List<OfferEnti> stepList  = new ArrayList<>();
 		

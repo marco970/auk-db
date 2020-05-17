@@ -13,6 +13,9 @@ import pl.auk.back.StepsRead;
 import pl.auk.entities.Aukcje;
 import pl.auk.entities.Bidders;
 import pl.auk.entities.Steps;
+import pl.auk.java.beans.front2.minPost.NextMinPostBean;
+import pl.auk.java.beans.front2.minPost.NextMinPostLab;
+import pl.auk.jd.test.form.StartEnterForm;
 
 public class AukcjaIntegrate  {
 	
@@ -41,9 +44,8 @@ public class AukcjaIntegrate  {
 		BiddersRead br = new BiddersRead(aukcja.getIdAukcja());
 		this.bidders = br.getBidders();
 		
-		for (Bidders el: bidders) {
-			System.out.println(el.getName()+" "+el.getIdBidder());
-		}
+		List<OfferRaw> krok0 = new ArrayList<>();
+
 		StepsRead sr = new StepsRead (aukcja.getIdAukcja());
 		List<Steps> listSteps = sr.getSteps();
 		List<Integer> kroki = new ArrayList<>();
@@ -57,7 +59,21 @@ public class AukcjaIntegrate  {
 		if (kroki.isEmpty())	{
 			
 			System.out.println("Aukcja "+ aukcja.getNazwaAuk() + " jeszcze się nie rozpoczęła");
-//			tu uruchamiamy StepEnterForm
+			
+//			trzeba zrobić nowy formularz do wprowadzania wartości począttkowych
+			List<String> biddersStr = new ArrayList();
+			for (Bidders el: bidders) {
+				System.out.println("--> "+el.getName()+" "+el.getIdBidder());
+				biddersStr.add(el.getName());
+
+				
+				krok0.add(new OfferRaw(0, el.getName(), 0)); 
+				
+			}
+			
+//			tu uruchamiamy nowy formularz do wprowadzenia początkowych wartości.
+			
+			new StartEnterForm("heja", biddersStr); 
 //			trzeba w kodzie utworzyć pierwszy krok
 //			trzeba potworzyć w ten sam sposób obiekty, które są potrzebne do uruchomienia tego formularza
 //			
@@ -69,55 +85,41 @@ public class AukcjaIntegrate  {
 			new StepSingleRead(aukcja.getIdAukcja(), maxKrokNr);
 //			tu odpalamy widok auckcji - MainWindowAukcja
 //			reszta j.w.
+			
+			krok0.add(new OfferRaw(1000, "Nokia", 5000000));
+			krok0.add(new OfferRaw(1000, "Huawei", 3900000));
+			krok0.add(new OfferRaw(1000, "Computaris", 6100000));
+			krok0.add(new OfferRaw(1000, "EPO", 4850000));
 		}
 		System.out.println("ostatni krok ma numer: "+ maxKrokNr);
 		
-		List<OfferRaw> krok0 = new ArrayList<>();
-		krok0.add(new OfferRaw(1000, "Nokia", 0));
-		krok0.add(new OfferRaw(1000, "Huawei", 0));
-		krok0.add(new OfferRaw(1000, "Computaris", 0));
-		krok0.add(new OfferRaw(1000, "EPO", 0));
+//		List<OfferRaw> krok0 = new ArrayList<>();
 
-//		List<OfferRaw> krok1 = new ArrayList<>();
-//		krok1.add(new OfferRaw(1, "Nokia", 900));
-//		krok1.add(new OfferRaw(1, "Huawei", 800));
-//		krok1.add(new OfferRaw(1, "Computaris", 800));
-//		krok1.add(new OfferRaw(1, "EPO", 1100));
-//		
-//		List<OfferRaw> krok2 = new ArrayList<>();
-//		krok2.add(new OfferRaw(2, "Nokia", 900));
-//		krok2.add(new OfferRaw(2, "Huawei", 600));
-//		krok2.add(new OfferRaw(2, "Computaris", 900));
-//		krok2.add(new OfferRaw(2, "EPO", 1100));
+		
+		List<Double> minPostList = new ArrayList();
+		/**
+		 *  do tej listy będziemy wrzucać minimalne postąpienia z bazy danych
+		 */
+		minPostList.add(0.0);
+
+		NextMinPostBean minPostBean = new NextMinPostBean(minPostList.get(minPostList.size()-1));
+		NextMinPostLab minPostLab = new NextMinPostLab(minPostBean.getMinPost()+""); 
+		minPostBean.addPropertyChangeListener(minPostLab);
 		
 		List<List<OfferEnti>> aukcjaLoc = new ArrayList<>();
-
-//		aukcja.add(krok0);
-//		aukcja.add(krok1);
-//		aukcja.add(krok1);
-		
-		OfferCalc oc = new OfferCalc();
-		
-		aukcjaLoc.add(oc.getOfferEntiList(krok0));
-//		aukcjaLoc.add(oc.getOfferEntiList(krok1));
-//		aukcjaLoc.add(oc.getOfferEntiList(krok2));
-		
+		aukcjaLoc.add(OfferCalc.getOfferEntiList(krok0));
 		ListBean lb = new ListBean(aukcjaLoc);
-		
-//		System.out.println("main lb "+lb.toString());
 
-		StepsView sv = new StepsView(lb);
-		
+
+		StepsView sv = new StepsView(lb, minPostList, minPostBean, minPostLab);	
+
 //		lb.addPropertyChangeListener(sv);
-		
-
 		MainWindowAukcja mw = new MainWindowAukcja(sv);
-		
+
 
 		
 		
-		
-//		new StepAdd(maxKrokNr+1, 200, aukcja.getIdAukcja());
+
 		
 		
 		
